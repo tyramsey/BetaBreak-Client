@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Auth from './components/Auth';
 import { render } from '@testing-library/react';
+import ClimbData from './components/ClimbData';
 
 function Copyright() {
   return (
@@ -22,9 +23,9 @@ function Copyright() {
 }
 
 type UpdateToken = {
-  sessionToken: string | null
+  
+  sessionToken: string
 }
-
 
 
 class App extends React.Component<{}, UpdateToken> {
@@ -32,7 +33,7 @@ class App extends React.Component<{}, UpdateToken> {
   constructor(props: string){
     super(props);
     let sessionToken = localStorage.getItem('sessionToken')
-    this.state = { sessionToken: ''}
+    this.state = {sessionToken: sessionToken ? sessionToken : ''}
   }
 
   // componentDidMount(){
@@ -60,17 +61,18 @@ class App extends React.Component<{}, UpdateToken> {
     });
   }
 
-  // protectedViews = () => {
-  //   return ( this.state.sessionToken === localStorage.getItem('token') ? <BirdNest token={sessionToken}/>
-  //   : <Auth updateToken={updateToken}/>)
-  // }
+  protectedViews = () => {
+    return ( this.state.sessionToken === localStorage.getItem('token') ? <ClimbData updateToken={this.updateToken} sessionToken={this.state.sessionToken}/>
+    : <Auth updateToken={this.updateToken}/>)
+  }
 
   render(){
   return (
     <div>
-      <Auth />
-      <Signup updateToken={this.updateToken}/>
-      <Login updateToken={this.updateToken}/>
+      {this.protectedViews()}
+      {/* <Auth updateToken={this.updateToken}/> */}
+      {/* <Signup updateToken={this.updateToken}/>
+      <Login updateToken={this.updateToken}/> */}
   <br/>
   <br/>
       <Copyright/>

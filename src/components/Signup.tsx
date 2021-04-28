@@ -13,7 +13,8 @@ import Container from '@material-ui/core/Container';
 interface SignUpProps {
   name?: any;
   value?: any;
-  updateToken: (newToken: string) => void
+  updateToken: (newToken: string) => void;
+  handleToggle: () => void;
 }
 interface SignUpState {
   username: string;
@@ -81,6 +82,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
           (response) => response.json()
       ).then((data) => {
           console.log(data.sessionToken)
+          this.props.updateToken(data.sessionToken)
       })
   };
 
@@ -154,7 +156,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
               >Register Me</Button>
             <Grid item>
               <Button 
-              // onClick={this.props.handleToggle}
+              onClick={this.props.handleToggle}
               >
                 Already a member? Login 
                 

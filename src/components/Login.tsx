@@ -11,9 +11,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 interface LoginProps {
-  name?: any;
-  value?: any;
+  name?: string;
+  value?: string;
   updateToken: (newToken: string) => void
+  handleToggle: () => void;
 }
 interface LoginState {
   username: string;
@@ -140,7 +141,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               >Register Me</Button>
             <Grid item>
               <Button 
-              // onClick={this.props.handleToggle}
+              onClick={this.props.handleToggle}
               >
                 New to the App? Register Here! 
                 
