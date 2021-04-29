@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Auth from './components/Auth';
 import { render } from '@testing-library/react';
 import ClimbData from './components/ClimbData';
+import Navbar from './components/Navbar';
 
 function Copyright() {
   return (
@@ -54,12 +55,12 @@ class App extends React.Component<{}, UpdateToken> {
     
   }
 
-  clearToken = () => {
-    localStorage.clear();
-    this.setState({
-      sessionToken: ''
-    });
-  }
+  // clearToken = () => {
+  //   localStorage.clear();
+  //   this.setState({
+  //     sessionToken: ''
+  //   });
+  // }
 
   protectedViews = () => {
     return ( this.state.sessionToken === localStorage.getItem('token') ? <ClimbData updateToken={this.updateToken} sessionToken={this.state.sessionToken}/>
@@ -69,6 +70,7 @@ class App extends React.Component<{}, UpdateToken> {
   render(){
   return (
     <div>
+      <Navbar />
       {this.protectedViews()}
       {/* <Auth updateToken={this.updateToken}/> */}
       {/* <Signup updateToken={this.updateToken}/>
