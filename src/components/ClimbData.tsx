@@ -1,8 +1,11 @@
 import * as React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import OutdoorClimbs from './OutdoorClimbs';
 
 import CreateTick from './CreateTick';
+
+import { OutdoorClimb } from './ClimbInterfaces';
 
 export interface ClimbDataProps {
     updateToken: (newToken: string) => void;
@@ -11,7 +14,7 @@ export interface ClimbDataProps {
 }
  
 export interface ClimbDataState {
-    climbs: [];
+    climbs: OutdoorClimb[];
     updateActive: boolean;
     climbToUpdate: {};
 }
@@ -22,7 +25,22 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
     constructor(props: ClimbDataProps) {
         super(props);
         this.state = { 
-            climbs: [],
+            climbs: [{
+              location: '',
+              routename: '',
+              date: '',
+              type: '',
+              difficulty: '',
+              pitches: 1,
+              grade: 0,
+              beta: '',
+              style: '',
+              duration: 0,
+              rating: 1, 
+              image_id: '',
+              secret: false
+
+            }],
             updateActive: false,
             climbToUpdate: {}
         }
@@ -58,6 +76,9 @@ componentDidMount = () => {
     this.fetchClimbs();
 }
 
+displayCards() {
+    return this.state.climbs.length > 0 ? this.state.climbs.map((climb) => <OutdoorClimbs climb={climb} climbs={this.state.climbs} editUpdateClimb={this.editUpdateClimb} updateOn={this.updateOn} fetchClimbs={this.fetchClimbs} sessionToken={this.props.sessionToken} />) : null;
+}
     render() { 
         return (
         <Container>
@@ -65,7 +86,9 @@ componentDidMount = () => {
            <Grid>
              <CreateTick updateToken={this.props.updateToken} fetchClimbs={this.fetchClimbs} sessionToken={this.props.sessionToken} />
            </Grid>
-           
+           <Grid container item xs={9} alignItems="flex-start">
+          {this.displayCards()}
+          </Grid>
            </Grid>
    
        </Container>);

@@ -138,7 +138,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               fullWidth
               variant="contained"
               color="primary"
-              >Register Me</Button>
+              >Login</Button>
             <Grid item>
               <Button 
               onClick={this.props.handleToggle}

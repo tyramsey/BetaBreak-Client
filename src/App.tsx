@@ -63,7 +63,7 @@ class App extends React.Component<{}, UpdateToken> {
   // }
 
   protectedViews = () => {
-    return ( this.state.sessionToken === localStorage.getItem('token') ? <ClimbData updateToken={this.updateToken} sessionToken={this.state.sessionToken}/>
+    return ( localStorage.getItem('sessionToken') ? <ClimbData updateToken={this.updateToken} sessionToken={this.state.sessionToken}/>
     : <Auth updateToken={this.updateToken}/>)
   }
 

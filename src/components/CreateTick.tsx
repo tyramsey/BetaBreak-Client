@@ -107,25 +107,25 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.sessionToken
               }),
-              body: JSON.stringify({ createout: { location: this.state.location, routename: this.state.routename, date: this.state.date, type: this.state.type, difficulty: this.state.difficulty, pitches: this.state.pitches, grade: this.state.grade, beta: this.state.beta, style: this.state.style, duration: this.state.duration, rating: this.state.rating, image_url: this.state.image_url, secret: this.state.secret } })
+              body: JSON.stringify({ outdoor: { location: this.state.location, routename: this.state.routename, date: this.state.date, type: this.state.type, difficulty: this.state.difficulty, pitches: this.state.pitches, grade: this.state.grade, beta: this.state.beta, style: this.state.style, duration: this.state.duration, rating: this.state.rating, image_url: this.state.image_url, secret: this.state.secret } })
             })
             .then(response => response.json())
             .then(climbData => {
               console.table(climbData);
-            //   this.setState({ location: ''});
-            //   this.setState({ routename: ''});
-            //   this.setState({ date: ''});
-            //   this.setState({ type: ''});
-            //   this.setState({ difficulty: ''});
-            //   this.setState({ pitches: ''});
-            //   this.setState({ grade: ''});
-            //   this.setState({ beta: ''});
-            //   this.setState({ style: ''});
-            //   this.setState({ duration: ''});
-            //   this.setState({ rating: []});
-            //   this.setState({ image_url: ''});
-            //   this.setState({ secret: false});
-            //   this.props.fetchClimbs();
+              this.setState({ location: ''});
+              this.setState({ routename: ''});
+              this.setState({ date: ''});
+              this.setState({ type: ''});
+              this.setState({ difficulty: ''});
+              this.setState({ pitches: ''});
+              this.setState({ grade: ''});
+              this.setState({ beta: ''});
+              this.setState({ style: ''});
+              this.setState({ duration: ''});
+              this.setState({ rating: []});
+              this.setState({ image_url: ''});
+              this.setState({ secret: false});
+              this.props.fetchClimbs();
             })
           }
 

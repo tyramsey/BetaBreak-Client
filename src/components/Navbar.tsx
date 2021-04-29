@@ -11,7 +11,10 @@ export interface NavbarProps {
 export interface NavbarState {
     isOpen: boolean;
 }
- 
+//  type clearToken = {
+//   new (): Location; prototype: Location; 
+//  }
+
 class Navbar extends React.Component<NavbarProps, NavbarState> {
     constructor(props: NavbarProps) {
         super(props);
@@ -24,6 +27,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
 
     clearToken = () => {
         localStorage.clear();
+        window.location.reload(true);
       }
 
     render() { 
