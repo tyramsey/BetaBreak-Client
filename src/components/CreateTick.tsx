@@ -13,7 +13,7 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import { makeStyles } from '@material-ui/core/styles';
 
 export interface CreateTickProps {
-    updateToken: (newToken: string) => void
+    
     sessionToken: string;
     // fetchClimbs: (updateActive: boolean) => void;
     fetchClimbs: Function;
@@ -99,13 +99,14 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
     }
 
         handleSubmit = (event: any) => {
+          let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
     
             event.preventDefault();
             fetch('http://localhost:3000/outdoor/createout', {
               method: 'POST',
               headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': this.props.sessionToken
+                'Authorization': token ? token : ''
               }),
               body: JSON.stringify({ outdoor: { location: this.state.location, routename: this.state.routename, date: this.state.date, type: this.state.type, difficulty: this.state.difficulty, pitches: this.state.pitches, grade: this.state.grade, beta: this.state.beta, style: this.state.style, duration: this.state.duration, rating: this.state.rating, image_url: this.state.image_url, secret: this.state.secret } })
             })
@@ -124,12 +125,13 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
               this.setState({ duration: ''});
               this.setState({ rating: []});
               this.setState({ image_url: ''});
-              this.setState({ secret: false});
+              this.setState({ secret: true});
               this.props.fetchClimbs();
             })
           }
 
     render() { 
+      console.log(this.props.sessionToken)
         return ( 
             <Container>
             <br/>

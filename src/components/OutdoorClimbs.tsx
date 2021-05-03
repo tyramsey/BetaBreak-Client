@@ -41,11 +41,12 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
     }
 
     deleteClimb = (climb: any) => {
-        fetch(`http://localhost:3000/outdoor/updateclimb/${climb.id}`, {
+        let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
+        fetch(`http://localhost:3000/outdoor/updateout/${climb.id}`, {
   method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Authorization': this.props.sessionToken
+        'Authorization': token ? token : ''
       })
     })
     .then(() => this.props.fetchClimbs())

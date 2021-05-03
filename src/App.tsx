@@ -33,8 +33,8 @@ class App extends React.Component<{}, UpdateToken> {
 
   constructor(props: string){
     super(props);
-    let sessionToken = localStorage.getItem('sessionToken')
-    this.state = {sessionToken: sessionToken ? sessionToken : ''}
+
+    this.state = {sessionToken: ''}
   }
 
   // componentDidMount(){
@@ -63,7 +63,7 @@ class App extends React.Component<{}, UpdateToken> {
   // }
 
   protectedViews = () => {
-    return ( localStorage.getItem('sessionToken') ? <ClimbData updateToken={this.updateToken} sessionToken={this.state.sessionToken}/>
+    return ( localStorage.getItem('sessionToken') ? <ClimbData sessionToken={this.state.sessionToken}/>
     : <Auth updateToken={this.updateToken}/>)
   }
 
