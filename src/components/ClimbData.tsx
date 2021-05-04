@@ -64,25 +64,25 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
     })
     .then(response => response.json())
     .then((climbData) => {
-      console.log(climbData)
-      // this.setState({climbToUpdate: climbData}));
+      // console.log(climbData)
+      this.setState({climbs: climbData});
     });
   }
-//     editUpdateClimb = (climb: number) => {
-//     this.setState({climbToUpdate: climb});
-//     console.log(climb);
-//   };
+    editUpdateClimb = (climb: number) => {
+    this.setState({climbToUpdate: climb});
+    console.log(climb);
+  };
 
-//   updateOn = () => this.setState({updateActive: true});
+  updateOn = () => this.setState({updateActive: true});
 //   updateOff = () => this.setState({updateActive: false});
 
-// componentDidMount = () => {
-//     this.fetchClimbs();
-// }
+componentDidMount = () => {
+    this.fetchClimbs();
+}
 
-// displayCards() {
-//     return this.state.climbs.length > 0 ? this.state.climbs.map((climb) => <OutdoorClimbs climb={climb} climbs={this.state.climbs} editUpdateClimb={this.editUpdateClimb} updateOn={this.updateOn} fetchClimbs={this.fetchClimbs} sessionToken={this.props.sessionToken} />) : null;
-// }
+displayCards() {
+    return this.state.climbs.length > 0 ? this.state.climbs.map((climb) => <OutdoorClimbs climb={climb} climbs={this.state.climbs} editUpdateClimb={this.editUpdateClimb} updateOn={this.updateOn} fetchClimbs={this.fetchClimbs} sessionToken={this.props.sessionToken} />) : null;
+}
     render() { 
         return (
         <Container>
@@ -91,7 +91,7 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
              <CreateTick fetchClimbs={this.fetchClimbs} sessionToken={this.props.sessionToken} />
            </Grid>
            <Grid container item xs={9} alignItems="flex-start">
-          {/* {this.displayCards()} */}
+          {this.displayCards()}
           </Grid>
            </Grid>
    
