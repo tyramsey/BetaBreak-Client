@@ -9,6 +9,7 @@ import Auth from './components/Auth';
 import { render } from '@testing-library/react';
 import ClimbData from './components/ClimbData';
 import Navbar from './components/Navbar';
+import {Route, Switch, Redirect} from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -67,9 +68,11 @@ class App extends React.Component<{}, UpdateToken> {
     : <Auth updateToken={this.updateToken}/>)
   }
 
+
   render(){
   return (
     <div>
+      {/* <Switch> */}
       <Navbar />
       {this.protectedViews()}
       {/* <Auth updateToken={this.updateToken}/> */}
@@ -78,6 +81,7 @@ class App extends React.Component<{}, UpdateToken> {
   <br/>
   <br/>
       <Copyright/>
+      {/* </Switch> */}
     </div>
   );
 }

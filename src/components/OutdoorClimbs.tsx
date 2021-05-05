@@ -48,7 +48,7 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
 
     deleteClimb = (climb: any) => {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
-        fetch(`http://localhost:3000/outdoor/updateout/${climb.id}`, {
+        fetch(`http://localhost:3000/outdoor/deleteout/${this.props.climb.id}`, {
   method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -111,34 +111,30 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
 
 <TableContainer>
 <Table  aria-label="simple table">
-  <TableHead>
-    <TableRow>
-      <TableCell>Route Name</TableCell>
-      <TableCell align="right">Location</TableCell>
-      <TableCell align="right">Date</TableCell>
-      <TableCell align="right">Type</TableCell>
-      <TableCell align="right">Difficulty</TableCell>
-      <TableCell align="right">Style</TableCell>
-      <TableCell align="right">Grade</TableCell>
-      <TableCell align="right">Beta</TableCell>
-    </TableRow>
-  </TableHead>
+  
   <TableBody>
-    {this.props.climbs.map((climb) => (
+    
       <TableRow key={this.props.climb.routename}>
         <TableCell component="th" scope="row">
           {this.props.climb.routename}
         </TableCell>
-        <TableCell align="right">{this.props.climb.location}</TableCell>
+        <TableCell align="right">{this.props.climb.location} </TableCell>
         <TableCell align="right">{this.props.climb.date}</TableCell>
         <TableCell align="right">{this.props.climb.type}</TableCell>
         <TableCell align="right">{this.props.climb.difficulty}</TableCell>
         <TableCell align="right">{this.props.climb.style}</TableCell>
         <TableCell align="right">{this.props.climb.grade}</TableCell>
         <TableCell align="right">{this.props.climb.beta}</TableCell>
+        <TableCell align="right">{this.props.climb.duration}</TableCell>
+        <TableCell align="right">{this.props.climb.pitches}</TableCell>
+        <TableCell align="right">{this.props.climb.rating}</TableCell>
+        <TableCell align="right">{this.props.climb.image_id}</TableCell>
+        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
+  <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
       </TableRow>
-    ))}
+    
   </TableBody>
+  
 </Table>
 </TableContainer>
       

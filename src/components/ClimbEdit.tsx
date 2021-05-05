@@ -8,18 +8,17 @@ import Container from '@material-ui/core/Container';
 import { FormControlLabel } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import SvgIcon from "@material-ui/core/SvgIcon";
-import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
 
-export interface CreateTickProps {
-    
+export interface ClimbEditProps {
     sessionToken: string;
-    // fetchClimbs: (updateActive: boolean) => void;
     // fetchClimbs: Function;
+    updateOff: Function;
+    climbToUpdate: any | null;
+    updateOn: Function;
 }
  
-export interface CreateTickState {
+export interface ClimbEditState {
     location: string;
     routename: string;
     date: string;
@@ -33,111 +32,69 @@ export interface CreateTickState {
     rating: any;
     image_url: string;
     secret: boolean;
+    id: number | null
 }
  
-type uploadImage = {
-    e: any;
-}
-
-
-
-class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
-    constructor(props: CreateTickProps) {
+class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
+    constructor(props: ClimbEditProps) {
         super(props);
-        this.state = {
-            location: '',
-            routename: '',
-            date: '',
-            type: '',
-            difficulty: '',
-            pitches: '',
-            grade: '',
-            beta: '',
-            style: '',
-            duration: '',
-            rating: [],
-            image_url: '',
-            secret: false
-        }
-
-        // this.state = initialState;
-        // this.state = { location: '' };
-        // this.state = { routename: ''};
-        // this.state = { date: ''};
-        // this.state = { type: ''};
-        // this.state = { difficulty: ''};
-        // this.state = { pitches: ''};
-        // this.state = { grade: ''};
-        // this.state = { beta: ''};
-        // this.state = { style: ''};
-        // this.state = { duration: ''};
-        // this.state = { rating: []};
-        // this.state = { image_url: ''};
-        // this.state = { secret: false};
+        this.state = { 
+        id: this.props.climbToUpdate ? this.props.climbToUpdate.id : null,
+        location: '',
+        routename: '',
+        date: '',
+        type: '',
+        difficulty: '',
+        pitches: '',
+        grade: '',
+        beta: '',
+        style: '',
+        duration: '',
+        rating: [],
+        image_url: '',
+        secret: false 
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // uploadImage = async e => {
-    //     const files = e.target.files
-    //     const data = new FormData()
-    //     data.append('file', files[0])
-    //     data.append('upload_preset', 'cloudinary-betabreak')
-    //     console.log(data)
-    //     const res = await fetch('https://api.cloudinary.com/v1_1/betabreak/image/upload', {
-    //         method: 'POST',
-    //         body: data
-    //     })
-    //     const file = await res.json()
-    
-    //     const image_url=file.secure_url
-    //     console.log(image_url)
-    //     this.setState({image_url : file.secure_url})
-    //     }
-
-    uploadImage() {
-        alert('hello');
-    }
-
-        handleSubmit = (event: any) => {
-          let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
-    
-            event.preventDefault();
-            fetch('http://localhost:3000/outdoor/createout', {
-              method: 'POST',
-              headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': token ? token : ''
-              }),
-              body: JSON.stringify({ outdoor: { location: this.state.location, routename: this.state.routename, date: this.state.date, type: this.state.type, difficulty: this.state.difficulty, pitches: this.state.pitches, grade: this.state.grade, beta: this.state.beta, style: this.state.style, duration: this.state.duration, rating: this.state.rating, image_url: this.state.image_url, secret: this.state.secret } })
-            })
-            .then(response => response.json())
-            .then(climbData => {
-              console.table(climbData);
-              this.setState({ location: ''});
-              this.setState({ routename: ''});
-              this.setState({ date: ''});
-              this.setState({ type: ''});
-              this.setState({ difficulty: ''});
-              this.setState({ pitches: ''});
-              this.setState({ grade: ''});
-              this.setState({ beta: ''});
-              this.setState({ style: ''});
-              this.setState({ duration: ''});
-              this.setState({ rating: []});
-              this.setState({ image_url: ''});
-              this.setState({ secret: true});
-              // this.props.fetchClimbs();
-            })
-          }
-
+    handleSubmit = (event: any) => {
+        let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
+  
+          event.preventDefault();
+          fetch(`http://localhost:3000/outdoor/updateout/${this.props.climbToUpdate.id}`, {
+            method: 'PUT',
+            headers: new Headers({
+              'Content-Type': 'application/json',
+              'Authorization': token ? token : ''
+            }),
+            body: JSON.stringify({ outdoor: { location: this.state.location, routename: this.state.routename, date: this.state.date, type: this.state.type, difficulty: this.state.difficulty, pitches: this.state.pitches, grade: this.state.grade, beta: this.state.beta, style: this.state.style, duration: this.state.duration, rating: this.state.rating, image_url: this.state.image_url, secret: this.state.secret } })
+          })
+          .then(response => response.json())
+          .then(climbData => {
+            console.table(climbData);
+            this.setState({ location: ''});
+            this.setState({ routename: ''});
+            this.setState({ date: ''});
+            this.setState({ type: ''});
+            this.setState({ difficulty: ''});
+            this.setState({ pitches: ''});
+            this.setState({ grade: ''});
+            this.setState({ beta: ''});
+            this.setState({ style: ''});
+            this.setState({ duration: ''});
+            this.setState({ rating: []});
+            this.setState({ image_url: ''});
+            this.setState({ secret: true});
+            // this.props.fetchClimbs();
+          })
+          this.props.updateOff();
+        }
     render() { 
-      console.log(this.props.sessionToken)
-        return ( 
+        return (
             <Container>
             <br/>
             <br/>
-            <br/>
-            <h3>Create an Climb!</h3>
+            <h3>Update your Climb!</h3>
             <br/>
             <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -293,7 +250,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                         </Select>
                      
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                       <TextField
                         variant="outlined"
                         required
@@ -307,7 +264,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                         id="image"
                         autoComplete="image"
                       />
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
                       <FormControlLabel
                         
@@ -327,11 +284,11 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                     fullWidth
                     variant="contained"
                   >
-                    Create Outdoor Tick!
+                    Update Outdoor Tick!
                   </Button >
             </Container>
-         );
+            );
     }
 }
  
-export default CreateTick;
+export default ClimbEdit;

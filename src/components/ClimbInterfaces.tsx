@@ -14,5 +14,9 @@ export interface OutdoorClimb {
     rating: number;
     image_id: string;
     secret: boolean;
+    // updatedAt: string;
+    // createdAt: string;
+    id: number;
+    // owner_id: number;
 
 }

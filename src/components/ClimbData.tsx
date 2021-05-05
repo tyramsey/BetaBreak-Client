@@ -2,8 +2,16 @@ import * as React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import OutdoorClimbs from './OutdoorClimbs';
-
+import ClimbEdit from './ClimbEdit';
 import CreateTick from './CreateTick';
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 
 import { OutdoorClimb } from './ClimbInterfaces';
 
@@ -38,7 +46,8 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
               duration: 0,
               rating: 1, 
               image_id: '',
-              secret: false
+              secret: false,
+              id: 1
 
             }],
             updateActive: false,
@@ -67,6 +76,7 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
       // console.log(climbData)
       this.setState({climbs: climbData});
     });
+    // this.displayTable = this.displayTable.bind(this)
   }
     editUpdateClimb = (climb: number) => {
     this.setState({climbToUpdate: climb});
@@ -74,26 +84,43 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
   };
 
   updateOn = () => this.setState({updateActive: true});
-//   updateOff = () => this.setState({updateActive: false});
+  updateOff = () => this.setState({updateActive: false});
 
 componentDidMount = () => {
     this.fetchClimbs();
+    console.log(this.state.climbs)
 }
 
-displayCards() {
-    return this.state.climbs.length > 0 ? this.state.climbs.map((climb) => <OutdoorClimbs climb={climb} climbs={this.state.climbs} editUpdateClimb={this.editUpdateClimb} updateOn={this.updateOn} fetchClimbs={this.fetchClimbs} sessionToken={this.props.sessionToken} />) : null;
+displayTable() {
+    return this.state.climbs.length > 0 ? this.state.climbs.map((climb) => <OutdoorClimbs climb={climb} climbs={this.state.climbs} editUpdateClimb={this.editUpdateClimb} updateOn={this.updateOn} fetchClimbs={this.fetchClimbs.bind(this)} sessionToken={this.props.sessionToken} />) : null;
 }
     render() { 
         return (
         <Container>
         <Grid container xs={12}>
            <Grid>
-             <CreateTick fetchClimbs={this.fetchClimbs} sessionToken={this.props.sessionToken} />
+             <CreateTick sessionToken={this.props.sessionToken} />
+             {/* fetchClimbs={this.fetchClimbs} */}
            </Grid>
            <Grid container item xs={9} alignItems="flex-start">
-          {this.displayCards()}
+           <TableHead>
+    <TableRow>
+      <TableCell>Route Name</TableCell>
+      <TableCell align="right">Location</TableCell>
+      <TableCell align="right">Date</TableCell>
+      <TableCell align="right">Type</TableCell>
+      <TableCell align="right">Difficulty</TableCell>
+      <TableCell align="right">Style</TableCell>
+      <TableCell align="right">Grade</TableCell>
+      <TableCell align="right">Beta</TableCell>
+      
+    </TableRow>
+  </TableHead>
+          {this.displayTable()}
+          {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>}
           </Grid>
            </Grid>
+           <Button onClick={this.fetchClimbs.bind(this)}>Fetch Button</Button>
    
        </Container>);
     }
