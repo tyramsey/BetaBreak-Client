@@ -41,7 +41,38 @@ type uploadImage = {
     e: any;
 }
 
-
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  BirdrIcon: {
+    margin: theme.spacing(1),
+    backgroundColor: '#c2b092',
+  },
+  form: {
+    width: '100%', 
+    marginTop: theme.spacing(1),
+  },
+  button: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#eae3cb',
+  },
+  checkbox: {
+    backgroundColor: '#b65f50',
+  },
+})
 
 class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
     constructor(props: CreateTickProps) {
