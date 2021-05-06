@@ -37,7 +37,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
           <Typography variant="h6">
             BetaBreak
           </Typography>
-          <Button onClick={this.clearToken}>Logout</Button>
+          <Button variant='contained' color='primary' onClick={this.clearToken}>Logout</Button>
         </Toolbar>
       </AppBar> );
     }

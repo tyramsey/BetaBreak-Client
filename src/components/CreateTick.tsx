@@ -11,6 +11,8 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { makeStyles } from '@material-ui/core/styles';
+import {InputLabel} from '@material-ui/core';
+import {FormControl} from '@material-ui/core';
 
 export interface CreateTickProps {
     
@@ -28,7 +30,7 @@ export interface CreateTickState {
     pitches: string;
     grade: string;
     beta: string;
-    style: string;
+    style: any;
     duration: string;
     rating: any;
     image_url: string;
@@ -53,7 +55,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
             pitches: '',
             grade: '',
             beta: '',
-            style: '',
+            style: [],
             duration: '',
             rating: [],
             image_url: '',
@@ -123,7 +125,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
               this.setState({ beta: ''});
               this.setState({ style: ''});
               this.setState({ duration: ''});
-              this.setState({ rating: []});
+              this.setState({ rating: Number('')});
               this.setState({ image_url: ''});
               this.setState({ secret: true});
               // this.props.fetchClimbs();
@@ -247,7 +249,9 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField
+                      <FormControl>
+                        <InputLabel>Style</InputLabel>
+                      <Select
                         variant="outlined"
                         required
                         fullWidth
@@ -257,7 +261,14 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                         value={this.state.style}
                         name="style"
                         autoComplete="Style"
-                      />
+                      >
+                      <MenuItem value={1}>TopRope</MenuItem>
+                          <MenuItem value={2}>Preplaced Gear</MenuItem>
+                          <MenuItem value={3}>Redpoint</MenuItem>
+                          <MenuItem value={4}>Flash</MenuItem>
+                          <MenuItem value={5}>Onsight</MenuItem>
+                      </Select>
+                      </FormControl>
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
@@ -273,9 +284,11 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                       />
                     </Grid>
                     <Grid item xs={12}>
+                      <FormControl>
+                    <InputLabel htmlFor="rating-native-simple">Rating</InputLabel>
                     <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
+                        native
+                        inputProps={{name: 'rating', id: 'rating-native-simple',}}
                         variant="outlined"
                         required
                         fullWidth
@@ -285,14 +298,15 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                         label="Rating"
                         autoComplete="Rating"
                         >
-                          <MenuItem value={1}>Common</MenuItem>
-                          <MenuItem value={2}>Uncommon</MenuItem>
-                          <MenuItem value={3}>Rare</MenuItem>
-                          <MenuItem value={4}>Very Rare</MenuItem>
-                          <MenuItem value={5}>Legendary</MenuItem>
+                          <option value={1}>Choss</option>
+                          <option value={2}>Awkward</option>
+                          <option value={3}>Interesting</option>
+                          <option value={4}>Classic</option>
+                          <option value={5}>TestPiece</option>
                         </Select>
-                     
+                        </FormControl>
                     </Grid>
+                    
                     <Grid item xs={12}>
                       <TextField
                         variant="outlined"

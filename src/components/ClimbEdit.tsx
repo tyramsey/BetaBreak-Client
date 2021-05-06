@@ -242,11 +242,11 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
                         label="Rating"
                         autoComplete="Rating"
                         >
-                          <MenuItem value={1}>Common</MenuItem>
-                          <MenuItem value={2}>Uncommon</MenuItem>
-                          <MenuItem value={3}>Rare</MenuItem>
-                          <MenuItem value={4}>Very Rare</MenuItem>
-                          <MenuItem value={5}>Legendary</MenuItem>
+                          <MenuItem value={1}>Choss</MenuItem>
+                          <MenuItem value={2}>Awkward</MenuItem>
+                          <MenuItem value={3}>Interesting</MenuItem>
+                          <MenuItem value={4}>Classic</MenuItem>
+                          <MenuItem value={5}>TestPiece</MenuItem>
                         </Select>
                      
                     </Grid>

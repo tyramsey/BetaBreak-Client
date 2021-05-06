@@ -114,10 +114,11 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
   
   <TableBody>
     
-      <TableRow key={this.props.climb.routename}>
+      <TableRow key={this.props.climb.id}>
         <TableCell component="th" scope="row">
-          {this.props.climb.routename}
+          {this.props.climb.id}
         </TableCell>
+        <TableCell align="right">{this.props.climb.routename} </TableCell>
         <TableCell align="right">{this.props.climb.location} </TableCell>
         <TableCell align="right">{this.props.climb.date}</TableCell>
         <TableCell align="right">{this.props.climb.type}</TableCell>

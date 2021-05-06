@@ -11,9 +11,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import CreateGoal from './CreateGoal';
+import GoalDisplay from './GoalDisplay';
+import GoalEdit from './GoalEdit';
 
 
 import { OutdoorClimb } from './ClimbInterfaces';
+import { GoalObject } from './ClimbInterfaces';
 
 export interface ClimbDataProps {
     // updateToken: (newToken: string) => void;
@@ -25,6 +29,8 @@ export interface ClimbDataState {
     climbs: OutdoorClimb[];
     updateActive: boolean;
     climbToUpdate: {};
+    goals: GoalObject[];
+    goalToUpdate: any;
 }
 
 
@@ -51,7 +57,19 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
 
             }],
             updateActive: false,
-            climbToUpdate: {}
+            climbToUpdate: {},
+            goals: [{
+              pitchcount: '',
+              tradpitches: '',
+              sportpitches: '',
+              tradmaxdiff: '',
+              sportmaxdiff: '',
+              daysclimbed: '',
+              duration: '',
+              secret: false,
+              id: 1
+            }],
+            goalToUpdate: {}
         }
 
         
@@ -61,6 +79,28 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
         // this.state = {climbToUpdate: {}}
     }
 
+    fetchGoals() {
+      fetch('http://localhost:3000/goal/getgoal', {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': `${localStorage.getItem('sessionToken')}`
+      })
+    })
+    .then(response => response.json())
+    .then((goalData) => {
+      // console.log(climbData)
+      this.setState({goals: goalData});
+    });
+    }
+    editUpdateGoal = (goal: number) => {
+      this.setState({goalToUpdate: goal});
+      console.log(goal);
+    }
+
+    displayGoals() {
+      return this.state.goals.length > 0 ? this.state.goals.map((goal) => <GoalDisplay goal={goal} goals={this.state.goals} editUpdateGoal={this.editUpdateGoal} updateOn={this.updateOn} fetchGoals={this.fetchGoals.bind(this)} sessionToken={this.props.sessionToken} />) : null;
+    }
     fetchClimbs() {
       // let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
 
@@ -87,6 +127,7 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
   updateOff = () => this.setState({updateActive: false});
 
 componentDidMount = () => {
+  this.fetchGoals();
     this.fetchClimbs();
     console.log(this.state.climbs)
 }
@@ -97,7 +138,12 @@ displayTable() {
     render() { 
         return (
         <Container>
+
         <Grid container xs={12}>
+        <Grid>
+             <CreateGoal sessionToken={this.props.sessionToken} />
+             {/* fetchClimbs={this.fetchClimbs} */}
+           </Grid>
            <Grid>
              <CreateTick sessionToken={this.props.sessionToken} />
              {/* fetchClimbs={this.fetchClimbs} */}
@@ -105,7 +151,28 @@ displayTable() {
            <Grid container item xs={9} alignItems="flex-start">
            <TableHead>
     <TableRow>
-      <TableCell>Route Name</TableCell>
+      <TableCell>#</TableCell>
+      <TableCell align="right">PitchCount</TableCell>
+      <TableCell align="right">TradPitches</TableCell>
+      <TableCell align="right">SportPitches</TableCell>
+      <TableCell align="right">TradMaxDiff</TableCell>
+      <TableCell align="right">SportMaxDiff</TableCell>
+      <TableCell align="right">Days Climbed</TableCell>
+      <TableCell align="right">Duration</TableCell>
+      
+    </TableRow>
+  </TableHead>
+           {this.displayGoals()}
+           {this.state.updateActive ? <GoalEdit goalToUpdate={this.state.goalToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>}
+           <br/>
+           <br/>
+           <br/>
+           <Button onClick={this.fetchGoals.bind(this)}>Fetch Goals Button</Button>
+           <br/><br/><br/>
+           <TableHead>
+    <TableRow>
+      <TableCell>#</TableCell>
+      <TableCell>RouteName</TableCell>
       <TableCell align="right">Location</TableCell>
       <TableCell align="right">Date</TableCell>
       <TableCell align="right">Type</TableCell>
@@ -116,11 +183,12 @@ displayTable() {
       
     </TableRow>
   </TableHead>
+          
           {this.displayTable()}
           {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>}
           </Grid>
            </Grid>
-           <Button onClick={this.fetchClimbs.bind(this)}>Fetch Button</Button>
+           <Button onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>
    
        </Container>);
     }
