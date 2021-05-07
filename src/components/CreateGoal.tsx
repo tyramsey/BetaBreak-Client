@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { FormControlLabel } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
+import './Styles.css';
 
 export interface CreateGoalProps {
     sessionToken: string
@@ -68,9 +68,9 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
             })
     }
     render() { 
-        return ( 
-        <Container>
-            <Grid item xs={12}>
+        return ( <div className='createGoalForm'>
+        <Container >
+            <Grid item xs={4}>
                       <FormControl>
                     <InputLabel htmlFor="pitchcount-native-simple">PitchCount</InputLabel>
                     <Select
@@ -562,7 +562,7 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
                     <Grid item xs={12}>
                       <FormControl>
                     <InputLabel htmlFor="duration-native-simple">Duration</InputLabel>
-                    <Select
+                    <Select className='input-style'
                         native
                         inputProps={{name: 'duration', id: 'duration-native-simple',}}
                         variant="outlined"
@@ -585,7 +585,7 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
                           <option value={9}>135</option>
                           <option value={10}>150</option>
                           <option value={11}>165</option>
-                          <option value={12}>180</option>
+                          <option value={12}>180</option>ß
                           <option value={13}>195</option>
                           <option value={14}>210</option>
                           <option value={15}>225</option>
@@ -640,7 +640,8 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
                   </Button >
 
 
-        </Container> );
+        </Container> 
+        </div>);
     }
 }
  

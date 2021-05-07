@@ -9,19 +9,13 @@ import { FormControlLabel } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
 
 export interface ClimbEditProps {
     sessionToken: string;
     // fetchClimbs: Function;
-    // updateOff: Function;
+    updateOff: Function;
     climbToUpdate: any | null;
-    // updateOn: Function;
+    updateOn: Function;
 }
  
 export interface ClimbEditState {
@@ -38,8 +32,7 @@ export interface ClimbEditState {
     rating: any;
     image_url: string;
     secret: boolean;
-    id: number | null;
-    open: boolean;
+    id: number | null
 }
  
 class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
@@ -59,8 +52,7 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
         duration: '',
         rating: [],
         image_url: '',
-        secret: false,
-        open: true 
+        secret: false 
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -95,37 +87,13 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
             this.setState({ secret: true});
             // this.props.fetchClimbs();
           })
-          // this.props.updateOff();
+          this.props.updateOff();
         }
-
-        handleClickOpen = () => {
-          this.setState({open: true});
-        };
-      
-        handleClose = () => {
-         this.setState({open:false});
-        };
-      
     render() { 
-        return (<div>
-          <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-            Update
-          </Button>
-          <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            // PaperComponent={PaperComponent}
-            aria-labelledby="draggable-dialog-title"
-          >
-            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-              Subscribe
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                To subscribe to this website, please enter your email address here. We will send updates
-                occasionally.
-              </DialogContentText>
-              <Container>
+        return (
+          
+
+            <Container>
             <br/>
             <br/>
             <h3>Update your Climb!</h3>
@@ -312,39 +280,15 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
                     </Grid>
                     
                   </Grid>
-                  </Container>
-            </DialogContent>
-            <DialogActions>
-              <Button autoFocus onClick={this.handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.handleSubmit} color="primary">
-                Send!
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      //     <Dialog>
-      //   <DialogTitle id="form-dialog-title">Update</DialogTitle>
-      //   <DialogContent>
-      //     <DialogContentText>
-      //       I want to update the climb.
-      //     </DialogContentText>
-
-      
-      //             </DialogContent>
-      //   <DialogActions>
-      //             <Button
-      //               type="submit"
-      //               onClick={this.handleSubmit}
-      //               fullWidth
-      //               variant="contained"
-      //             >
-      //               Update Outdoor Tick!
-      //             </Button >
-            
-      //       </DialogActions>
-      // </Dialog>
+                  <Button
+                    type="submit"
+                    onClick={this.handleSubmit}
+                    fullWidth
+                    variant="contained"
+                  >
+                    Update Outdoor Tick!
+                  </Button >
+            </Container>
             );
     }
 }

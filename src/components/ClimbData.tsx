@@ -141,6 +141,8 @@ displayTable() {
 
         <Grid container xs={12}>
         <Grid>
+
+          {/* create ternary user === '1'   */}
              <CreateGoal sessionToken={this.props.sessionToken} />
              {/* fetchClimbs={this.fetchClimbs} */}
            </Grid>
@@ -159,6 +161,9 @@ displayTable() {
       <TableCell align="right">SportMaxDiff</TableCell>
       <TableCell align="right">Days Climbed</TableCell>
       <TableCell align="right">Duration</TableCell>
+      <TableCell align="right">SportMaxDiff</TableCell>
+      <TableCell align="right">Days Climbed</TableCell>
+      <TableCell align="right">Duration</TableCell>
       
     </TableRow>
   </TableHead>
@@ -169,23 +174,10 @@ displayTable() {
            <br/>
            <Button onClick={this.fetchGoals.bind(this)}>Fetch Goals Button</Button>
            <br/><br/><br/>
-           <TableHead>
-    <TableRow>
-      <TableCell>#</TableCell>
-      <TableCell>RouteName</TableCell>
-      <TableCell align="right">Location</TableCell>
-      <TableCell align="right">Date</TableCell>
-      <TableCell align="right">Type</TableCell>
-      <TableCell align="right">Difficulty</TableCell>
-      <TableCell align="right">Style</TableCell>
-      <TableCell align="right">Grade</TableCell>
-      <TableCell align="right">Beta</TableCell>
-      
-    </TableRow>
-  </TableHead>
+           
           
           {this.displayTable()}
-          {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} sessionToken={this.props.sessionToken} /> : <></>}
+          {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>}
           </Grid>
            </Grid>
            <Button onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>
