@@ -91,8 +91,8 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
         }
     render() { 
         return (
-
           
+
             <Container>
             <br/>
             <br/>

@@ -33,7 +33,7 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
             pitchcount:0,
             tradpitches: 0,
             sportpitches: 0,
-            tradmaxdiff: [],
+            tradmaxdiff: ['5.10', '5.9', '5.8'],
             sportmaxdiff: [],
             daysclimbed: 0,
             duration: 0,
