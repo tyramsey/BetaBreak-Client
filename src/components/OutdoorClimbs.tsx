@@ -12,6 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import ClimbEdit from './ClimbEdit';
 
 import { OutdoorClimb } from './ClimbInterfaces';
 
@@ -130,7 +131,8 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
         <TableCell align="right">{this.props.climb.pitches}</TableCell>
         <TableCell align="right">{this.props.climb.rating}</TableCell>
         <TableCell align="right">{this.props.climb.image_id}</TableCell>
-        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
+        <ClimbEdit sessionToken={this.props.sessionToken} climbToUpdate={this.props.editUpdateClimb}/>
+        {/* <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button> */}
   <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
       </TableRow>
     

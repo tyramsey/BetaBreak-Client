@@ -185,7 +185,7 @@ displayTable() {
   </TableHead>
           
           {this.displayTable()}
-          {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>}
+          {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} sessionToken={this.props.sessionToken} /> : <></>}
           </Grid>
            </Grid>
            <Button onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>

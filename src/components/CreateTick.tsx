@@ -165,7 +165,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
 
     render() { 
       console.log(this.props.sessionToken)
-        return ( 
+        return ( <div className="create-tick-form">
             <Container>
             <br/>
             <br/>
@@ -375,6 +375,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                     Create Outdoor Tick!
                   </Button >
             </Container>
+            </div>
          );
     }
 }
