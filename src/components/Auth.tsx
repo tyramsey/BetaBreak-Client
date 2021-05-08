@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 
 export interface AuthProps {
     updateToken: (newToken: string) => void; 
+    updateRole: Function;
 }
  
 export interface AuthState {
@@ -45,7 +46,7 @@ class Auth extends React.Component<AuthProps, AuthState> {
               </Jumbotron>
             </div>
                         <Grid container> 
-                            {this.state.showLogin === true ? <Login updateToken={this.props.updateToken} handleToggle={this.handleToggle} /> : <Signup updateToken={this.props.updateToken} handleToggle={this.handleToggle}/>}
+                            {this.state.showLogin === true ? <Login updateToken={this.props.updateToken} updateRole={this.props.updateRole}handleToggle={this.handleToggle} /> : <Signup updateToken={this.props.updateToken} updateRole={this.props.updateRole}handleToggle={this.handleToggle}/>}
                         </Grid>
                         
                         

@@ -12,6 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import GoalEdit from './GoalEdit';
 
 import {GoalObject} from './ClimbInterfaces';
 import { url } from 'node:inspector';
@@ -67,14 +68,15 @@ class GoalDisplay extends React.Component<GoalDisplayProps, GoalDisplayState> {
         <TableCell component="th" scope="row">
           {this.props.goal.id}
         </TableCell>
-        <TableCell align="right">{this.props.goal.pitchcount} </TableCell>
+        <TableCell align="right">{this.props.goal.pitchcount} Pitches </TableCell>
         <TableCell align="right">{this.props.goal.tradpitches}</TableCell>
         <TableCell align="right">{this.props.goal.sportpitches}</TableCell>
         <TableCell align="right">{this.props.goal.tradmaxdiff}</TableCell>
         <TableCell align="right">{this.props.goal.sportmaxdiff}</TableCell>
         <TableCell align="right">{this.props.goal.daysclimbed}</TableCell>
         <TableCell align="right">{this.props.goal.duration}</TableCell>
-        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateGoal(this.props.goal); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
+        <GoalEdit sessionToken={this.props.sessionToken} goalToUpdate={this.props.editUpdateGoal} goal={this.props.goal}/>
+        {/* <Button variant='contained' size='small' onClick={() => {this.props.editUpdateGoal(this.props.goal); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button> */}
   <Button  variant='contained' size='small'  onClick={() => this.deleteGoal(this.props.goal)}>Delete</Button>
       </TableRow>
     

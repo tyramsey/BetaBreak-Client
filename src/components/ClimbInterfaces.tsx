@@ -68,3 +68,25 @@ export interface GoalResponse {
     updatedAt: Date;
     createdAt: Date;
 }
+
+export interface ModalProps {
+//   BackdropComponent?: React.ElementType<BackdropProps>;
+//   BackdropProps?: Partial<BackdropProps>;
+  children: React.ReactElement;
+  closeAfterTransition?: boolean;
+//   container?: PortalProps['container'];
+  disableAutoFocus?: boolean;
+  disableBackdropClick?: boolean;
+  disableEnforceFocus?: boolean;
+  disableEscapeKeyDown?: boolean;
+//   disablePortal?: PortalProps['disablePortal'];
+  disableRestoreFocus?: boolean;
+  hideBackdrop?: boolean;
+  keepMounted?: boolean;
+//   manager?: ModalManager;
+  onBackdropClick?: React.ReactEventHandler<{}>;
+  onClose?: React.ReactEventHandler<{}>;
+  onEscapeKeyDown?: React.ReactEventHandler<{}>;
+//   onRendered?: PortalProps['onRendered'];
+  open: boolean;
+}

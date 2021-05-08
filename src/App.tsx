@@ -10,6 +10,8 @@ import { render } from '@testing-library/react';
 import ClimbData from './components/ClimbData';
 import Navbar from './components/Navbar';
 import {Route, Switch, Redirect} from 'react-router-dom'
+import OutdoorClimbs from './components/OutdoorClimbs';
+import GoalDisplay from './components/GoalDisplay';
 
 function Copyright() {
   return (
@@ -24,18 +26,23 @@ function Copyright() {
   );
 }
 
-type UpdateToken = {
-  
-  sessionToken: string
+export interface AppProps{
+
+}
+export interface AppState {
+  sessionToken: string,
+  role: string,
+  json: string,
+  results: []
+
 }
 
+class App extends React.Component<AppProps, AppState> {
 
-class App extends React.Component<{}, UpdateToken> {
-
-  constructor(props: string){
+  constructor(props: AppProps){
     super(props);
 
-    this.state = {sessionToken: ''}
+    this.state = {sessionToken: '', role: '', json: '', results: []}
   }
 
   // componentDidMount(){
@@ -56,6 +63,13 @@ class App extends React.Component<{}, UpdateToken> {
     
   }
 
+  updateRole = (newRole: string) => {
+    localStorage.setItem('role', newRole);
+    console.log(newRole);
+    this.setState({
+      role: newRole
+    })
+  }
   // clearToken = () => {
   //   localStorage.clear();
   //   this.setState({
@@ -65,23 +79,41 @@ class App extends React.Component<{}, UpdateToken> {
 
   protectedViews = () => {
     return ( localStorage.getItem('sessionToken') ? <ClimbData sessionToken={this.state.sessionToken}/>
-    : <Auth updateToken={this.updateToken}/>)
+    : <Auth updateToken={this.updateToken} updateRole={this.updateRole}/>)
   }
 
+  componentDidMount(){
+    let sessionToken = localStorage.getItem('sessionToken')
+    let role = localStorage.getItem('role')
+
+    if (sessionToken){
+      this.setState({sessionToken: sessionToken})
+    }
+    if (role){
+      this.setState({
+        role: role
+      })
+    }
+  }
 
   render(){
   return (
-    <div>
-      {/* <Switch> */}
+    <div className='App'>
+      
       <Navbar />
-      {this.protectedViews()}
+      <Switch>
+      <Route exact path='/'>{this.protectedViews()}</Route>
+      <Route exact path='/climbs' component={OutdoorClimbs}/>
+      <Route exact path='/goals' component={GoalDisplay}/>
+      
+      
       {/* <Auth updateToken={this.updateToken}/> */}
       {/* <Signup updateToken={this.updateToken}/>
       <Login updateToken={this.updateToken}/> */}
   <br/>
   <br/>
       <Copyright/>
-      {/* </Switch> */}
+      </Switch>
     </div>
   );
 }
