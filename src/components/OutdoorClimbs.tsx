@@ -12,6 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import ClimbEdit from './ClimbEdit';
 
 import { OutdoorClimb } from './ClimbInterfaces';
 import APIURL from '../helpers/environments';
@@ -60,59 +61,76 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
     }
 
     render() { 
-        return (
+      
+        return (<div>
         
-      //   <Card style={{ width: '100%' }}>
-      //   <CardActionArea>
-      //     <CardMedia
-      //       // className={classes.media}
-      //       image={this.props.climb.image_id}
-      //       title="Contemplative Reptile"
-      //     />
-      //     <CardContent>
-      //       <Typography align='center' gutterBottom variant="h5" component="h2">
-      //       {this.props.climb.location}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.routename}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.date} || {this.props.climb.duration}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.type}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.difficulty}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.pitches}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.grade}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.beta}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.style}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">Rarity Rating: {this.props.climb.rating}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.secret}
-      //       </Typography>
-      //     </CardContent>
-      //   </CardActionArea>
-      //   <CardActions style={{justifyContent: 'center'}}>
-      //   <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
-      //   <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
-      //   </CardActions>
-      // </Card>
+        <Card style={{ width: '100%' }}>
+        <CardActionArea>
+          <CardMedia
+            // className={classes.media}
+            image={this.props.climb.image_id}
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <Typography align='center' gutterBottom variant="h5" component="h2">
+            {this.props.climb.location}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.routename}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.date} || {this.props.climb.duration}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.type}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.difficulty}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.pitches}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.grade}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.beta}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.style}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">Rarity Rating: {this.props.climb.rating}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.secret}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions style={{justifyContent: 'center'}}>
+        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
+        <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
+        </CardActions>
+      </Card>
 
 <TableContainer>
 <Table  aria-label="simple table">
-  
+<TableHead>
+    <TableRow>
+      <TableCell>#</TableCell>
+      <TableCell>RouteName</TableCell>
+      <TableCell align="right">Location</TableCell>
+      <TableCell align="right">Date</TableCell>
+      <TableCell align="right">Type</TableCell>
+      <TableCell align="right">Difficulty</TableCell>
+      <TableCell align="right">Style</TableCell>
+      <TableCell align="right">Grade</TableCell>
+      <TableCell align="right">Beta</TableCell>
+      <TableCell align="right">Duration</TableCell>
+      <TableCell align="right">Rating</TableCell>
+      <TableCell align="right">Image</TableCell>
+      
+    </TableRow>
+  </TableHead>
   <TableBody>
     
       <TableRow key={this.props.climb.id}>
@@ -131,7 +149,8 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
         <TableCell align="right">{this.props.climb.pitches}</TableCell>
         <TableCell align="right">{this.props.climb.rating}</TableCell>
         <TableCell align="right">{this.props.climb.image_id}</TableCell>
-        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
+        <ClimbEdit sessionToken={this.props.sessionToken} climbToUpdate={this.props.editUpdateClimb} climb={this.props.climb}/>
+        {/* <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button> */}
   <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
       </TableRow>
     
@@ -139,7 +158,7 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
   
 </Table>
 </TableContainer>
-      
+      </div>
       );
     }
 }

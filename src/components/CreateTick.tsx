@@ -10,7 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import SvgIcon from "@material-ui/core/SvgIcon";
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {InputLabel} from '@material-ui/core';
 import {FormControl} from '@material-ui/core';
 
@@ -43,6 +43,38 @@ type uploadImage = {
 }
 
 
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'left',
+  },
+  BirdrIcon: {
+    margin: theme.spacing(1),
+    backgroundColor: '#c2b092',
+  },
+  form: {
+    width: '100%', 
+    marginTop: theme.spacing(1),
+  },
+  button: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#eae3cb',
+  },
+  checkbox: {
+    backgroundColor: '#b65f50',
+  },
+})
 
 class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
     constructor(props: CreateTickProps) {
@@ -79,27 +111,27 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
         // this.state = { secret: false};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    // uploadImage = async e => {
-    //     const files = e.target.files
-    //     const data = new FormData()
-    //     data.append('file', files[0])
-    //     data.append('upload_preset', 'cloudinary-betabreak')
-    //     console.log(data)
-    //     const res = await fetch('https://api.cloudinary.com/v1_1/betabreak/image/upload', {
-    //         method: 'POST',
-    //         body: data
-    //     })
-    //     const file = await res.json()
+// CLOUDINARY_URL=cloudinary://382911151317211:6cp4pnzXfNj-TRiKrxsyDB83uRI@deo12ltor
+    uploadImage = async (e:any) => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'cloudinary-betabreak')
+        console.log(data)
+        const res = await fetch('https://api.cloudinary.com/v1_1/deo12ltor/image/upload', {
+            method: 'POST',
+            body: data
+        })
+        const file = await res.json()
     
-    //     const image_url=file.secure_url
-    //     console.log(image_url)
-    //     this.setState({image_url : file.secure_url})
-    //     }
+        const image_url=file.secure_url
+        console.log(image_url)
+        this.setState({image_url : file.secure_url})
+        }
 
-    uploadImage() {
-        alert('hello');
-    }
+    // uploadImage() {
+    //     alert('hello');
+    // }
 
         handleSubmit = (event: any) => {
           let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
@@ -135,8 +167,8 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
 
     render() { 
       console.log(this.props.sessionToken)
-        return ( 
-            <Container>
+        return ( <div className="create-tick-form">
+            <Container style={{backgroundColor: '#caff00'}}>
             <br/>
             <br/>
             <br/>
@@ -345,6 +377,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                     Create Outdoor Tick!
                   </Button >
             </Container>
+            </div>
          );
     }
 }

@@ -17,6 +17,7 @@ interface LoginProps {
   value?: string;
   updateToken: (newToken: string) => void
   handleToggle: () => void;
+  updateRole: Function;
 }
 interface LoginState {
   username: string;
@@ -84,6 +85,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
           (response) => response.json()
       ).then((data) => {
         this.props.updateToken(data.sessionToken)
+        this.props.updateRole(data.role)
         console.log(data.sessionToken)
       })
   };

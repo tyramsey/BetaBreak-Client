@@ -10,17 +10,22 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import APIURL from '../helpers/environments';
+import { Select } from "@material-ui/core";
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 interface SignUpProps {
   name?: any;
   value?: any;
   updateToken: (newToken: string) => void;
   handleToggle: () => void;
+  updateRole: Function;
 }
 interface SignUpState {
   username: string;
   email: string;
   password: string;
+  role: any;
   errors: {
     username: string;
     email: string;
@@ -39,6 +44,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
           username: "",
           email: "",
           password: "",
+          role: "",
           errors: {
             username: "",
             email: "",
@@ -75,7 +81,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
       event.preventDefault();
       fetch(`${APIURL}/user/register`, {
          method: 'POST',
-         body: JSON.stringify({user: {username: this.state.username, email: this.state.email, password: this.state.password}}),
+         body: JSON.stringify({user: {username: this.state.username, email: this.state.email, password: this.state.password, role: this.state.role}}),
          headers: new Headers({
              'Content-Type': 'application/json'
          })
@@ -84,6 +90,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
       ).then((data) => {
           console.log(data.sessionToken)
           this.props.updateToken(data.sessionToken)
+          this.props.updateRole(data.role)
       })
   };
 
@@ -146,6 +153,22 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
               {errors.password.length > 5 && (
                 <span style={{ color: "red" }}>{errors.password}</span>
               )}
+            </Grid>
+            <Grid>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                variant="outlined"
+                required
+                fullWidth
+                name="role"
+                onChange={(e) => this.setState({role: e.target.value})}
+                value={this.state.role}
+                label="Role"
+              >
+                <MenuItem value='1'>Guide</MenuItem>
+                <MenuItem value='2'>Aspirant</MenuItem>
+              </Select>
             </Grid>
             
               <Button
