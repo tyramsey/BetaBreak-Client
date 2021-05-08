@@ -22,6 +22,7 @@ export interface ClimbEditProps {
     // updateOff: Function;
     climbToUpdate: any | null;
     // updateOn: Function;
+    climb: any;
 }
  
 export interface ClimbEditState {
@@ -60,7 +61,7 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
         rating: [],
         image_url: '',
         secret: false,
-        open: true 
+        open: false 
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -69,7 +70,7 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
   
           event.preventDefault();
-          fetch(`http://localhost:3000/outdoor/updateout/${this.props.climbToUpdate.id}`, {
+          fetch(`http://localhost:3000/outdoor/updateout/${this.props.climb.id}`, {
             method: 'PUT',
             headers: new Headers({
               'Content-Type': 'application/json',
@@ -245,7 +246,7 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
                         id="style"
                         label="Style"
                         onChange={(e) => this.setState({style: e.target.value})}
-                        value={this.state.style}
+                        value={this.props.climb.style}
                         name="style"
                         autoComplete="Style"
                       />

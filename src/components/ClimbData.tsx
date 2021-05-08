@@ -127,6 +127,7 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
   updateOff = () => this.setState({updateActive: false});
 
 componentDidMount = () => {
+
   this.fetchGoals();
     this.fetchClimbs();
     console.log(this.state.climbs)
@@ -163,29 +164,16 @@ displayTable() {
     </TableRow>
   </TableHead>
            {this.displayGoals()}
-           {this.state.updateActive ? <GoalEdit goalToUpdate={this.state.goalToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>}
+           {/* {this.state.updateActive ? <GoalEdit goalToUpdate={this.state.goalToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>} */}
            <br/>
            <br/>
            <br/>
            <Button onClick={this.fetchGoals.bind(this)}>Fetch Goals Button</Button>
            <br/><br/><br/>
-           <TableHead>
-    <TableRow>
-      <TableCell>#</TableCell>
-      <TableCell>RouteName</TableCell>
-      <TableCell align="right">Location</TableCell>
-      <TableCell align="right">Date</TableCell>
-      <TableCell align="right">Type</TableCell>
-      <TableCell align="right">Difficulty</TableCell>
-      <TableCell align="right">Style</TableCell>
-      <TableCell align="right">Grade</TableCell>
-      <TableCell align="right">Beta</TableCell>
-      
-    </TableRow>
-  </TableHead>
+           
           
           {this.displayTable()}
-          {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} sessionToken={this.props.sessionToken} /> : <></>}
+          {/* {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} sessionToken={this.props.sessionToken} /> : <></>} */}
           </Grid>
            </Grid>
            <Button onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>

@@ -60,6 +60,7 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
     }
 
     render() { 
+      
         return (
         
       //   <Card style={{ width: '100%' }}>
@@ -112,7 +113,23 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
 
 <TableContainer>
 <Table  aria-label="simple table">
-  
+<TableHead>
+    <TableRow>
+      <TableCell>#</TableCell>
+      <TableCell>RouteName</TableCell>
+      <TableCell align="right">Location</TableCell>
+      <TableCell align="right">Date</TableCell>
+      <TableCell align="right">Type</TableCell>
+      <TableCell align="right">Difficulty</TableCell>
+      <TableCell align="right">Style</TableCell>
+      <TableCell align="right">Grade</TableCell>
+      <TableCell align="right">Beta</TableCell>
+      <TableCell align="right">Duration</TableCell>
+      <TableCell align="right">Rating</TableCell>
+      <TableCell align="right">Image</TableCell>
+      
+    </TableRow>
+  </TableHead>
   <TableBody>
     
       <TableRow key={this.props.climb.id}>
@@ -131,7 +148,7 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
         <TableCell align="right">{this.props.climb.pitches}</TableCell>
         <TableCell align="right">{this.props.climb.rating}</TableCell>
         <TableCell align="right">{this.props.climb.image_id}</TableCell>
-        <ClimbEdit sessionToken={this.props.sessionToken} climbToUpdate={this.props.editUpdateClimb}/>
+        <ClimbEdit sessionToken={this.props.sessionToken} climbToUpdate={this.props.editUpdateClimb} climb={this.props.climb}/>
         {/* <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button> */}
   <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
       </TableRow>

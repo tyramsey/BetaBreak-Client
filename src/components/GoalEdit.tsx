@@ -9,12 +9,18 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { FormControlLabel } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export interface GoalEditProps {
     sessionToken: string;
-    updateOff: Function;
+    // updateOff: Function;
     goalToUpdate: any | null;
-    updateOn: Function;
+    // updateOn: Function;
+    goal: any;
 }
  
 export interface GoalEditState {
@@ -27,6 +33,7 @@ export interface GoalEditState {
     duration: any;
     secret: Boolean;
     id: number | null;
+    open: any;
 }
  
 class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
@@ -42,13 +49,14 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
             daysclimbed: '',
             duration: '',
             secret: false,
+            open: false
         };
     }
     handleSubmit = (event: any) => {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
     
             event.preventDefault();
-            fetch(`http://localhost:3000/goal/updategoal/${this.props.goalToUpdate.id}`, {
+            fetch(`http://localhost:3000/goal/updategoal/${this.props.goal.id}`, {
               method: 'PUT',
               headers: new Headers({
                 'Content-Type': 'application/json',
@@ -69,10 +77,36 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
               this.setState({ secret: true});
               // this.props.fetchClimbs();
             })
-            this.props.updateOff();
+            // this.props.updateOff();
     }
+
+    handleClickOpen = () => {
+      this.setState({open: true});
+    };
+  
+    handleClose = () => {
+     this.setState({open:false});
+    };
+
     render() { 
-        return ( 
+        return ( <div>
+          <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+            Update
+          </Button>
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            // PaperComponent={PaperComponent}
+            aria-labelledby="draggable-dialog-title"
+          >
+            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+              Subscribe
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                To subscribe to this website, please enter your email address here. We will send updates
+                occasionally.
+              </DialogContentText>
             <Container>
             <Grid item xs={12}>
                       <FormControl>
@@ -292,6 +326,17 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
 
 
         </Container>
+        </DialogContent>
+            <DialogActions>
+              <Button autoFocus onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={this.handleSubmit} color="primary">
+                Send!
+              </Button>
+            </DialogActions>
+          </Dialog>
+          </div>
          );
     }
 }
