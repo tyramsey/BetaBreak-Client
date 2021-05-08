@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {InputLabel} from '@material-ui/core';
 import {FormControl} from '@material-ui/core';
 
+import APIURL from '../helpers/environments';
 export interface CreateTickProps {
     
     sessionToken: string;
@@ -104,7 +105,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
           let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
     
             event.preventDefault();
-            fetch('http://localhost:3000/outdoor/createout', {
+            fetch(`${APIURL}/outdoor/createout`, {
               method: 'POST',
               headers: new Headers({
                 'Content-Type': 'application/json',

@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import APIURL from '../helpers/environments';
+
 interface LoginProps {
   name?: string;
   value?: string;
@@ -72,7 +74,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   };
   handleSubmit = (event: any) => {
       event.preventDefault();
-      fetch('http://localhost:3000/user/login', {
+      fetch(`${APIURL}/user/login`, {
          method: 'POST',
          body: JSON.stringify({user: {username: this.state.username, password: this.state.password}}),
          headers: new Headers({

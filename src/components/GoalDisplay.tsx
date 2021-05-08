@@ -14,7 +14,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 import {GoalObject} from './ClimbInterfaces';
-import { url } from 'node:inspector';
+// import { url } from 'node:inspector';
+import APIURL from '../helpers/environments';
 
 export interface GoalDisplayProps {
     sessionToken: string;
@@ -45,7 +46,7 @@ class GoalDisplay extends React.Component<GoalDisplayProps, GoalDisplayState> {
     
     deleteGoal = (goal: any) => {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
-        fetch(`http://localhost:3000/goal/deletegoal/${this.props.goal.id}`, {
+        fetch(`${APIURL}/goal/deletegoal/${this.props.goal.id}`, {
     method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',

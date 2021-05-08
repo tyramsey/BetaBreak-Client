@@ -10,6 +10,7 @@ import { FormControlLabel } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import APIURL from '../helpers/environments';
 
 export interface CreateGoalProps {
     sessionToken: string
@@ -45,7 +46,7 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
     
             event.preventDefault();
-            fetch('http://localhost:3000/goal/creategoal', {
+            fetch(`${APIURL}/goal/creategoal`, {
               method: 'POST',
               headers: new Headers({
                 'Content-Type': 'application/json',

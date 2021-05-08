@@ -14,7 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import CreateGoal from './CreateGoal';
 import GoalDisplay from './GoalDisplay';
 import GoalEdit from './GoalEdit';
-
+import APIURL from '../helpers/environments';
 
 import { OutdoorClimb } from './ClimbInterfaces';
 import { GoalObject } from './ClimbInterfaces';
@@ -80,7 +80,7 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
     }
 
     fetchGoals() {
-      fetch('http://localhost:3000/goal/getgoal', {
+      fetch(`${APIURL}/goal/getgoal`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
     fetchClimbs() {
       // let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
 
-        fetch('http://localhost:3000/outdoor/getout', {
+        fetch(`${APIURL}/outdoor/getout`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',

@@ -14,6 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import { OutdoorClimb } from './ClimbInterfaces';
+import APIURL from '../helpers/environments';
 
 export interface OutdoorClimbProps {
     sessionToken: string;
@@ -48,7 +49,7 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
 
     deleteClimb = (climb: any) => {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
-        fetch(`http://localhost:3000/outdoor/deleteout/${this.props.climb.id}`, {
+        fetch(`${APIURL}/outdoor/deleteout/${this.props.climb.id}`, {
   method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',

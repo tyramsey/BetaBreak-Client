@@ -10,6 +10,8 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem';
 
+import APIURL from '../helpers/environments';
+
 export interface ClimbEditProps {
     sessionToken: string;
     // fetchClimbs: Function;
@@ -61,7 +63,7 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
   
           event.preventDefault();
-          fetch(`http://localhost:3000/outdoor/updateout/${this.props.climbToUpdate.id}`, {
+          fetch(`${APIURL}/outdoor/updateout/${this.props.climbToUpdate.id}`, {
             method: 'PUT',
             headers: new Headers({
               'Content-Type': 'application/json',

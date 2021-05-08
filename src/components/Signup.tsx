@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import APIURL from '../helpers/environments';
 
 interface SignUpProps {
   name?: any;
@@ -72,7 +73,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
   };
   handleSubmit = (event: any) => {
       event.preventDefault();
-      fetch('http://localhost:3000/user/register', {
+      fetch(`${APIURL}/user/register`, {
          method: 'POST',
          body: JSON.stringify({user: {username: this.state.username, email: this.state.email, password: this.state.password}}),
          headers: new Headers({

@@ -10,6 +10,8 @@ import { FormControlLabel } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import APIURL from '../helpers/environments';
+
 export interface GoalEditProps {
     sessionToken: string;
     updateOff: Function;
@@ -48,7 +50,7 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
     
             event.preventDefault();
-            fetch(`http://localhost:3000/goal/updategoal/${this.props.goalToUpdate.id}`, {
+            fetch(`${APIURL}/goal/updategoal/${this.props.goalToUpdate.id}`, {
               method: 'PUT',
               headers: new Headers({
                 'Content-Type': 'application/json',
