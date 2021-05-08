@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
-import betabreak from '../assets/betabreaklogo.png'
+import betabreak from '../assets/betaTransparent.png';
 
 export interface NavbarProps {
     classes: any;
@@ -65,7 +65,8 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
     render() { 
       const {classes} = this.props;
       
-        return ( <AppBar position="static" style={{backgroundColor: '#caff00'}} >
+        return (
+           <AppBar position="static" style={{backgroundColor: '#caff00'}} >
         <Toolbar style={{color: '#000000'}}>
         <img src={betabreak} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title}>

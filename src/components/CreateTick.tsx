@@ -10,9 +10,11 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import SvgIcon from "@material-ui/core/SvgIcon";
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {InputLabel} from '@material-ui/core';
 import {FormControl} from '@material-ui/core';
+
+import './styles.css';
 
 export interface CreateTickProps {
     
@@ -41,6 +43,7 @@ type uploadImage = {
     e: any;
 }
 
+
 const styles = (theme:any) => ({
  
   palette: {
@@ -55,7 +58,7 @@ const styles = (theme:any) => ({
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'left',
   },
   BirdrIcon: {
     margin: theme.spacing(1),
@@ -166,7 +169,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
     render() { 
       console.log(this.props.sessionToken)
         return ( <div className="create-tick-form">
-            <Container>
+            <Container style={{backgroundColor: '#caff00'}}>
             <br/>
             <br/>
             <br/>

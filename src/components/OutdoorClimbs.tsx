@@ -61,55 +61,55 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
 
     render() { 
       
-        return (
+        return (<div>
         
-      //   <Card style={{ width: '100%' }}>
-      //   <CardActionArea>
-      //     <CardMedia
-      //       // className={classes.media}
-      //       image={this.props.climb.image_id}
-      //       title="Contemplative Reptile"
-      //     />
-      //     <CardContent>
-      //       <Typography align='center' gutterBottom variant="h5" component="h2">
-      //       {this.props.climb.location}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.routename}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.date} || {this.props.climb.duration}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.type}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.difficulty}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.pitches}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.grade}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.beta}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.style}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">Rarity Rating: {this.props.climb.rating}
-      //       </Typography>
-      //       <Typography align='center' variant="body2" color="textSecondary" component="p">
-      //       {this.props.climb.secret}
-      //       </Typography>
-      //     </CardContent>
-      //   </CardActionArea>
-      //   <CardActions style={{justifyContent: 'center'}}>
-      //   <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
-      //   <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
-      //   </CardActions>
-      // </Card>
+        <Card style={{ width: '100%' }}>
+        <CardActionArea>
+          <CardMedia
+            // className={classes.media}
+            image={this.props.climb.image_id}
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <Typography align='center' gutterBottom variant="h5" component="h2">
+            {this.props.climb.location}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.routename}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.date} || {this.props.climb.duration}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.type}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.difficulty}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.pitches}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.grade}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.beta}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.style}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">Rarity Rating: {this.props.climb.rating}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.climb.secret}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions style={{justifyContent: 'center'}}>
+        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
+        <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
+        </CardActions>
+      </Card>
 
 <TableContainer>
 <Table  aria-label="simple table">
@@ -157,7 +157,7 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
   
 </Table>
 </TableContainer>
-      
+      </div>
       );
     }
 }

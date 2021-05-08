@@ -98,14 +98,14 @@ class App extends React.Component<AppProps, AppState> {
 
   render(){
   return (
-    <div>
-      {/* <Switch> */}
+    <div className='App'>
+      
       <Navbar />
-      {/* <Switch>
-      <Route exact path='/' component={ClimbData}/>
+      <Switch>
+      <Route exact path='/'>{this.protectedViews()}</Route>
       <Route exact path='/climbs' component={OutdoorClimbs}/>
-      <Route exact path='/goals' component={GoalDisplay}/> */}
-      {this.protectedViews()}
+      <Route exact path='/goals' component={GoalDisplay}/>
+      
       
       {/* <Auth updateToken={this.updateToken}/> */}
       {/* <Signup updateToken={this.updateToken}/>
@@ -113,7 +113,7 @@ class App extends React.Component<AppProps, AppState> {
   <br/>
   <br/>
       <Copyright/>
-      {/* </Switch> */}
+      </Switch>
     </div>
   );
 }

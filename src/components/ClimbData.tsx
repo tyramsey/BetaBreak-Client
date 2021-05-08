@@ -142,7 +142,7 @@ displayTable() {
 
         <Grid container xs={12}>
         <Grid>
-             <CreateGoal sessionToken={this.props.sessionToken} />
+             {localStorage.getItem('role') === '1' ? <CreateGoal sessionToken={this.props.sessionToken} /> : null};
              {/* fetchClimbs={this.fetchClimbs} */}
            </Grid>
            <Grid>
