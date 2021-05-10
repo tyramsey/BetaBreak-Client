@@ -60,16 +60,29 @@ class GoalDisplay extends React.Component<GoalDisplayProps, GoalDisplayState> {
     }
     render() { 
         return ( <div style={{width: '100%'}}>
-            <TableContainer>
+            <TableContainer style={{width:'100%'}}>
 <Table  aria-label="simple table">
-  
+<TableHead>
+    <TableRow>
+      <TableCell>#</TableCell>
+      <TableCell align="right">PitchCount</TableCell>
+      <TableCell align="right">TradPitches</TableCell>
+      <TableCell align="right">SportPitches</TableCell>
+      <TableCell align="right">TradMaxDiff</TableCell>
+      <TableCell align="right">SportMaxDiff</TableCell>
+      <TableCell align="right">Days Climbed</TableCell>
+      <TableCell align="right">Duration</TableCell>
+      
+    </TableRow>
+  </TableHead>
+
   <TableBody>
     
       <TableRow key={this.props.goal.id}>
         <TableCell component="th" scope="row">
           {this.props.goal.id}
         </TableCell>
-        <TableCell align="right">{this.props.goal.pitchcount} Pitches </TableCell>
+        <TableCell align="right">{this.props.goal.pitchcount}</TableCell>
         <TableCell align="right">{this.props.goal.tradpitches}</TableCell>
         <TableCell align="right">{this.props.goal.sportpitches}</TableCell>
         <TableCell align="right">{this.props.goal.tradmaxdiff}</TableCell>

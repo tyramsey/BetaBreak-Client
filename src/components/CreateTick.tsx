@@ -13,6 +13,7 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import { withStyles } from '@material-ui/core/styles';
 import {InputLabel} from '@material-ui/core';
 import {FormControl} from '@material-ui/core';
+import {Input} from 'reactstrap';
 
 import APIURL from '../helpers/environments';
 export interface CreateTickProps {
@@ -31,9 +32,9 @@ export interface CreateTickState {
     pitches: string;
     grade: string;
     beta: string;
-    style: any;
+    style: string;
     duration: string;
-    rating: any;
+    rating: string;
     image_url: string;
     secret: boolean;
 }
@@ -88,9 +89,9 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
             pitches: '',
             grade: '',
             beta: '',
-            style: [],
+            style: '',
             duration: '',
-            rating: [],
+            rating: '',
             image_url: '',
             secret: false
         }
@@ -116,7 +117,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
         const files = e.target.files
         const data = new FormData()
         data.append('file', files[0])
-        data.append('upload_preset', 'cloudinary-betabreak')
+        data.append('upload_preset', 'betabreak')
         console.log(data)
         const res = await fetch('https://api.cloudinary.com/v1_1/deo12ltor/image/upload', {
             method: 'POST',
@@ -143,7 +144,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                 'Content-Type': 'application/json',
                 'Authorization': token ? token : ''
               }),
-              body: JSON.stringify({ outdoor: { location: this.state.location, routename: this.state.routename, date: this.state.date, type: this.state.type, difficulty: this.state.difficulty, pitches: this.state.pitches, grade: this.state.grade, beta: this.state.beta, style: this.state.style, duration: this.state.duration, rating: this.state.rating, image_url: this.state.image_url, secret: this.state.secret } })
+              body: JSON.stringify({ outdoor: { location: this.state.location, routename: this.state.routename, date: this.state.date, type: this.state.type, difficulty: this.state.difficulty, pitches: this.state.pitches, grade: this.state.grade, beta: this.state.beta, style: Number(this.state.style), duration: this.state.duration, rating: Number(this.state.rating), image_url: this.state.image_url, secret: this.state.secret } })
             })
             .then(response => response.json())
             .then(climbData => {
@@ -158,7 +159,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
               this.setState({ beta: ''});
               this.setState({ style: ''});
               this.setState({ duration: ''});
-              this.setState({ rating: Number('')});
+              this.setState({ rating: ''});
               this.setState({ image_url: ''});
               this.setState({ secret: true});
               // this.props.fetchClimbs();
@@ -175,7 +176,7 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
             <h3>Create an Climb!</h3>
             <br/>
             <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item sm={12}>
                       <TextField
                         autoComplete="Location"
                         name="location"
@@ -283,8 +284,8 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                     </Grid>
                     <Grid item xs={12}>
                       <FormControl>
-                        <InputLabel>Style</InputLabel>
-                      <Select
+                        {/* <InputLabel>Style</InputLabel> */}
+                      {/* <Select
                         variant="outlined"
                         required
                         fullWidth
@@ -300,7 +301,20 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                           <MenuItem value={3}>Redpoint</MenuItem>
                           <MenuItem value={4}>Flash</MenuItem>
                           <MenuItem value={5}>Onsight</MenuItem>
-                      </Select>
+                      </Select> */}
+                      <Input
+                      type="select"
+                      name="style"
+                      id="style"
+                      placeholder="style"
+                      onChange={(e) => this.setState({ style: e.target.value })}
+                      value={this.state.style}
+                      label="style">
+                        <option value={1}>Onsight</option>
+                          <option value={2}>Flash</option>
+                          <option value={3}>Redpoint</option>
+                          <option value={4}>TopRope</option>
+                      </Input>
                       </FormControl>
                     </Grid>
                     <Grid item xs={12}>
@@ -318,8 +332,8 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                     </Grid>
                     <Grid item xs={12}>
                       <FormControl>
-                    <InputLabel htmlFor="rating-native-simple">Rating</InputLabel>
-                    <Select
+                    {/* <InputLabel htmlFor="rating-native-simple">Rating</InputLabel> */}
+                    {/* <Select
                         native
                         inputProps={{name: 'rating', id: 'rating-native-simple',}}
                         variant="outlined"
@@ -336,7 +350,21 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
                           <option value={3}>Interesting</option>
                           <option value={4}>Classic</option>
                           <option value={5}>TestPiece</option>
-                        </Select>
+                        </Select> */}
+
+<Input
+                      type="select"
+                      name="rating"
+                      id="rating"
+                      placeholder="rating"
+                      onChange={(e) => this.setState({ rating: e.target.value })}
+                      value={this.state.rating}
+                      label="rating">
+                        <option value={1}>Choss</option>
+                          <option value={2}>Interesting</option>
+                          <option value={3}>Classic</option>
+                          <option value={4}>Testpiece</option>
+                      </Input>
                         </FormControl>
                     </Grid>
                     

@@ -13,6 +13,8 @@ import APIURL from '../helpers/environments';
 import { Select } from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
 
+import './styles.css';
+
 
 interface SignUpProps {
   name?: any;
@@ -98,13 +100,14 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
   render() {
     const { errors } = this.state;
     return (
+      <div className='signup'>
       <Container>
         <CssBaseline />
-          <Typography>Sign Up</Typography>
+          <Typography align='center' className='signup'>Sign Up</Typography>
           <br/>
           <form onSubmit={this.handleSubmit} noValidate>
             <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
+            <Grid item sm={6}>
               <TextField
                 autoComplete="username"
                 name="username"
@@ -120,7 +123,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
                 <span style={{ color: "red" }}>{errors.username}</span>
               )}
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item sm={6}>
               <TextField
                 autoComplete="email"
                 name="email"
@@ -137,7 +140,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
                 <span style={{ color: "red" }}>{errors.email}</span>
               )}
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item sm={6}>
               <TextField
                 autoComplete="password"
                 name="password"
@@ -154,7 +157,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
                 <span style={{ color: "red" }}>{errors.password}</span>
               )}
             </Grid>
-            <Grid>
+            <Grid item sm={6}>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -170,7 +173,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
                 <MenuItem value='2'>Aspirant</MenuItem>
               </Select>
             </Grid>
-            
+            <Grid item sm={6}>
               <Button
               type="submit"
               onClick={this.handleSubmit}
@@ -178,9 +181,12 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
               variant="contained"
               color="primary"
               >Register Me</Button>
-            <Grid item>
+              </Grid>
+            <Grid item sm={6}>
               <Button 
               onClick={this.props.handleToggle}
+              variant="contained"
+              fullWidth
               >
                 Already a member? Login 
                 
@@ -189,6 +195,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
             </Grid>
           </form>
       </Container>
+      </div>
     );
   }
 }

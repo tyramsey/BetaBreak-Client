@@ -112,8 +112,9 @@ class App extends React.Component<AppProps, AppState> {
       <Login updateToken={this.updateToken}/> */}
   <br/>
   <br/>
-      <Copyright/>
+      
       </Switch>
+      <Copyright/>
     </div>
   );
 }

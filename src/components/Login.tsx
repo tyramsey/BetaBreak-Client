@@ -97,11 +97,11 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     return (
       <Container>
         <CssBaseline />
-          <Typography>Login</Typography>
+          <Typography align='center'>Login</Typography>
           <br/>
           <form onSubmit={this.handleSubmit} noValidate>
             <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
+            <Grid item sm={6}>
               <TextField
                 autoComplete="username"
                 name="username"
@@ -118,7 +118,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               )}
             </Grid>
         
-            <Grid item xs={12} sm={4}>
+            <Grid item sm={6}>
               <TextField
                 autoComplete="password"
                 name="password"

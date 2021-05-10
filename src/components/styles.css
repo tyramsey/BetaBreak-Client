@@ -1,5 +1,22 @@
 .create-tick-form {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    width: 30%;
+    width: 100%;
 }
 
+.auth-container {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.text-light {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    opacity: 100%;
+}
+
+.signup {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.create-goal-form {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 100%;
+}

@@ -64,53 +64,6 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
       
         return (<div>
         
-        <Card style={{ width: '100%' }}>
-        <CardActionArea>
-          <CardMedia
-            // className={classes.media}
-            image={this.props.climb.image_id}
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography align='center' gutterBottom variant="h5" component="h2">
-            {this.props.climb.location}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.routename}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.date} || {this.props.climb.duration}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.type}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.difficulty}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.pitches}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.grade}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.beta}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.style}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">Rarity Rating: {this.props.climb.rating}
-            </Typography>
-            <Typography align='center' variant="body2" color="textSecondary" component="p">
-            {this.props.climb.secret}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions style={{justifyContent: 'center'}}>
-        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
-        <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
-        </CardActions>
-      </Card>
 
 <TableContainer>
 <Table  aria-label="simple table">
@@ -122,8 +75,9 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
       <TableCell align="right">Date</TableCell>
       <TableCell align="right">Type</TableCell>
       <TableCell align="right">Difficulty</TableCell>
-      <TableCell align="right">Style</TableCell>
+      <TableCell align="right">Pitches</TableCell>
       <TableCell align="right">Grade</TableCell>
+      <TableCell align="right">Style</TableCell>
       <TableCell align="right">Beta</TableCell>
       <TableCell align="right">Duration</TableCell>
       <TableCell align="right">Rating</TableCell>
@@ -142,13 +96,13 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
         <TableCell align="right">{this.props.climb.date}</TableCell>
         <TableCell align="right">{this.props.climb.type}</TableCell>
         <TableCell align="right">{this.props.climb.difficulty}</TableCell>
-        <TableCell align="right">{this.props.climb.style}</TableCell>
+        <TableCell align="right">{this.props.climb.pitches}</TableCell>
         <TableCell align="right">{this.props.climb.grade}</TableCell>
+        <TableCell align="right">{this.props.climb.style}</TableCell>
         <TableCell align="right">{this.props.climb.beta}</TableCell>
         <TableCell align="right">{this.props.climb.duration}</TableCell>
-        <TableCell align="right">{this.props.climb.pitches}</TableCell>
         <TableCell align="right">{this.props.climb.rating}</TableCell>
-        <TableCell align="right">{this.props.climb.image_id}</TableCell>
+        <TableCell align="right"><img src={this.props.climb.image_id} alt='' style={{width: '200px'}}/></TableCell>
         <ClimbEdit sessionToken={this.props.sessionToken} climbToUpdate={this.props.editUpdateClimb} climb={this.props.climb}/>
         {/* <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button> */}
   <Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button>
