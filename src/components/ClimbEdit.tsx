@@ -14,7 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import { OutdoorClimb } from './ClimbInterfaces';
 
 import APIURL from '../helpers/environments';
 
@@ -24,7 +24,7 @@ export interface ClimbEditProps {
     // updateOff: Function;
     climbToUpdate: any | null;
     // updateOn: Function;
-    climb: any;
+    climb: OutdoorClimb;
 }
  
 export interface ClimbEditState {
@@ -66,13 +66,16 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
         open: false 
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        console.log('climbToUpdate', this.props.climbToUpdate)
+        console.log('climb', this.props.climb)
     }
 
     handleSubmit = (event: any) => {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
   
           event.preventDefault();
-          fetch(`${APIURL}/outdoor/updateout/${this.props.climbToUpdate.id}`, {
+          
+          fetch(`${APIURL}/outdoor/updateout/${this.props.climb.id}`, {
             method: 'PUT',
             headers: new Headers({
               'Content-Type': 'application/json',
@@ -121,7 +124,7 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
             aria-labelledby="draggable-dialog-title"
           >
             <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-              Subscribe
+              {this.props.climb.id}
             </DialogTitle>
             <DialogContent>
               <DialogContentText>

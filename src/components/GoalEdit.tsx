@@ -36,7 +36,7 @@ export interface GoalEditState {
     duration: string;
     secret: Boolean;
     id: number | null;
-    open: boolean;
+    open: any;
 }
  
 class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {

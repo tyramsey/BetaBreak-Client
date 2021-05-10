@@ -31,6 +31,9 @@ export interface GoalObject {
     daysclimbed: string;
     duration: string;
     secret: boolean;
+    owner_id: number;
+    updatedAt: Date;
+    createdAt: Date;
 
 }
 
