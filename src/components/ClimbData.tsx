@@ -172,9 +172,6 @@ displayTable() {
           <br/>
           <br/>
            <Button onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>
-           <br/>
-          <br/>
-          <br/>
            <Col center md='4'>
              {localStorage.getItem('role') === '1' ? <CreateGoal sessionToken={this.props.sessionToken} /> : null}
              {/* fetchClimbs={this.fetchClimbs} */}

@@ -14,7 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import {Input} from 'reactstrap';
 
 import APIURL from '../helpers/environments';
 
@@ -241,17 +241,20 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="style"
-                        label="Style"
-                        onChange={(e) => this.setState({style: e.target.value})}
-                        value={this.props.climb.style}
-                        name="style"
-                        autoComplete="Style"
-                      />
+                    <Input
+                  type="select"
+                  name="style"
+                  id="style"
+                  placeholder="style"
+                  onChange={(e) => this.setState({ style: e.target.value })}
+                  value={this.state.style}
+                  label="style"
+                >
+                  <option value={1}>Onsight</option>
+                  <option value={2}>Flash</option>
+                  <option value={3}>Redpoint</option>
+                  <option value={4}>TopRope</option>
+                </Input>
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
