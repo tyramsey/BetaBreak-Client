@@ -1,30 +1,23 @@
 import * as React from 'react';
-// import Container from '@material-ui/core/Container';
-// import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import OutdoorClimbs from './OutdoorClimbs';
-import ClimbEdit from './ClimbEdit';
+
 import CreateTick from './CreateTick';
-// import Button from '@material-ui/core/Button';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableContainer from '@material-ui/core/TableContainer';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+
 import CreateGoal from './CreateGoal';
 import GoalDisplay from './GoalDisplay';
-import GoalEdit from './GoalEdit';
-import APIURL from '../helpers/environments';
 
-import { Container, Row, Col, Button } from "reactstrap";
+import APIURL from '../helpers/environments';
 
 import { OutdoorClimb } from './ClimbInterfaces';
 import { GoalObject } from './ClimbInterfaces';
 
 export interface ClimbDataProps {
-    // updateToken: (newToken: string) => void;
+  
     sessionToken: string;
-    // fetchClimbs: [];
+    
 }
  
 export interface ClimbDataState {
@@ -61,24 +54,19 @@ class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
             updateActive: false,
             climbToUpdate: {},
             goals: [{
-              pitchcount: '',
-              tradpitches: '',
-              sportpitches: '',
+              pitchcount: 0,
+              tradpitches: 0,
+              sportpitches: 0,
               tradmaxdiff: '',
               sportmaxdiff: '',
-              daysclimbed: '',
-              duration: '',
+              daysclimbed: 0,
+              duration: 0,
               secret: false,
-              id: 1
+              id: 0,
+              owner_id: 0
             }],
             goalToUpdate: {}
         }
-
-        
-        // this.state = {sessionToken: ''};
-        // this.state = {climbs: []};
-        // this.state = {updateActive: false};
-        // this.state = {climbToUpdate: {}}
     }
 
     fetchGoals() {
@@ -139,48 +127,38 @@ displayTable() {
     return this.state.climbs.length > 0 ? this.state.climbs.map((climb) => <OutdoorClimbs climb={climb} climbs={this.state.climbs} editUpdateClimb={this.editUpdateClimb} updateOn={this.updateOn} fetchClimbs={this.fetchClimbs.bind(this)} sessionToken={this.props.sessionToken} />) : null;
 }
     render() { 
-        return ( <div>
-        <Container style={{width: '100%'}}>
+        return (
+        <Container>
 
-        <Row>
+        <Grid container xs={12}>
         
-             <Col md='3'>
+           <Grid>
              <CreateTick sessionToken={this.props.sessionToken} />
              {/* fetchClimbs={this.fetchClimbs} */}
-           </Col>
-           <Col md='9'>
+           </Grid>
+           <Grid container item xs={9} alignItems="flex-start">
            
            {this.displayGoals()}
+           {/* {this.state.updateActive ? <GoalEdit goalToUpdate={this.state.goalToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>} */}
            <br/>
            <br/>
            <br/>
-           <Button center onClick={this.fetchGoals.bind(this)}>Fetch Goals Button</Button>
-           </Col>
-
-           </Row>
-           
-           <Row>
-           <Col md='12'>
-           
+           <Button onClick={this.fetchGoals.bind(this)}>Fetch Goals Button</Button>
            <br/><br/><br/>
            
           
           {this.displayTable()}
-          </Col>
-          </Row>
-          <br/>
-          <br/>
-          <br/>
+          {/* {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} sessionToken={this.props.sessionToken} /> : <></>} */}
+          </Grid>
+           </Grid>
            <Button onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>
-           <br/>
-          <br/>
-          <br/>
-           <Col center md='4'>
+           
+           <Grid>
              {localStorage.getItem('role') === '1' ? <CreateGoal sessionToken={this.props.sessionToken} /> : null}
              {/* fetchClimbs={this.fetchClimbs} */}
-             </Col>
-       </Container>
-       </div>);
+           </Grid>
+   
+       </Container>);
     }
 }
  

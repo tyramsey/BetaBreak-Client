@@ -17,23 +17,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 import APIURL from '../helpers/environments';
+import { GoalObject } from './ClimbInterfaces';
 
 export interface GoalEditProps {
     sessionToken: string;
     // updateOff: Function;
     goalToUpdate: any | null;
     // updateOn: Function;
-    goal: any;
+    goal: GoalObject;
 }
  
 export interface GoalEditState {
-    pitchcount: string;
-    tradpitches: string;
-    sportpitches: string;
+    pitchcount: number;
+    tradpitches: number;
+    sportpitches: number;
     tradmaxdiff: string;
     sportmaxdiff: string;
-    daysclimbed: string;
-    duration: string;
+    daysclimbed: number;
+    duration: number;
     secret: Boolean;
     id: number | null;
     open: any;
@@ -44,13 +45,13 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
         super(props);
         this.state = { 
             id: this.props.goalToUpdate ? this.props.goalToUpdate.id : null,
-            pitchcount: '',
-            tradpitches: '',
-            sportpitches: '',
+            pitchcount: 0,
+            tradpitches: 0,
+            sportpitches: 0,
             tradmaxdiff: '',
             sportmaxdiff: '',
-            daysclimbed: '',
-            duration: '',
+            daysclimbed: 0,
+            duration: 0,
             secret: false,
             open: false
         };
@@ -59,31 +60,31 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
         let token = this.props.sessionToken ? this.props.sessionToken: localStorage.getItem('sessionToken');
     
             event.preventDefault();
-            fetch(`${APIURL}/goal/updategoal/${this.props.goalToUpdate.id}`, {
+            fetch(`${APIURL}/goal/updategoal/${this.props.goal.id}`, {
               method: 'PUT',
               headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': token ? token : ''
               }),
-              body: JSON.stringify({ goal: {pitchcount: Number(this.state.pitchcount),
-                tradpitches: Number(this.state.tradpitches),
-                sportpitches: Number(this.state.sportpitches),
+              body: JSON.stringify({ goal: {pitchcount: this.state.pitchcount,
+                tradpitches: this.state.tradpitches,
+                sportpitches: this.state.sportpitches,
                 tradmaxdiff: this.state.tradmaxdiff,
                 sportmaxdiff: this.state.sportmaxdiff,
-                daysclimbed: Number(this.state.daysclimbed),
-                duration: Number(this.state.duration),
+                daysclimbed: this.state.daysclimbed,
+                duration: this.state.duration,
                 secret: this.state.secret } })
             })
             .then(response => response.json())
             .then(goalData => {
               console.table(goalData);
-              this.setState({ pitchcount: ''});
-              this.setState({ tradpitches: ''});
-              this.setState({ sportpitches: ''});
+              this.setState({ pitchcount: 0});
+              this.setState({ tradpitches: 0});
+              this.setState({ sportpitches: 0});
               this.setState({ tradmaxdiff: ''});
               this.setState({ sportmaxdiff: ''});
-              this.setState({ daysclimbed: ''});
-              this.setState({ duration: ''});
+              this.setState({ daysclimbed: 0});
+              this.setState({ duration: 0});
               this.setState({ secret: true});
               // this.props.fetchClimbs();
             })
@@ -116,222 +117,7 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
               
             <Container>
             <Grid item xs={12}>
-                      {/* <FormControl>
-                    <InputLabel htmlFor="pitchcount-native-simple">PitchCount</InputLabel>
-                    <Select
-                        native
-                        inputProps={{name: 'pitchcount', id: 'pitchcount-native-simple',}}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="pitchcount"
-                        onChange={(e) => this.setState({pitchcount: e.target.value})}
-                        value={this.state.pitchcount}
-                        label="PitchCount"
-                        autoComplete="PitchCount"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                          <option value={9}>9</option>
-                          <option value={10}>10</option>
-                        </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControl>
-                    <InputLabel htmlFor="tradpitches-native-simple">Trad Pitches</InputLabel>
-                    <Select
-                        native
-                        inputProps={{name: 'tradpitches', id: 'tradpitches-native-simple',}}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="tradpitches"
-                        onChange={(e) => this.setState({tradpitches: e.target.value})}
-                        value={this.state.tradpitches}
-                        label="tradpitches"
-                        autoComplete="tradpitches"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                          <option value={9}>9</option>
-                          <option value={10}>10</option>
-                        </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControl>
-                    <InputLabel htmlFor="sportpitches-native-simple">Sport Pitches</InputLabel>
-                    <Select
-                        native
-                        inputProps={{name: 'sportpitches', id: 'sportpitches-native-simple',}}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="sportpitches"
-                        onChange={(e) => this.setState({sportpitches: e.target.value})}
-                        value={this.state.sportpitches}
-                        label="sportpitches"
-                        autoComplete="sportpitches"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                          <option value={9}>9</option>
-                          <option value={10}>10</option>
-                        </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControl>
-                    <InputLabel htmlFor="tradmaxdiff-native-simple">Trad Max Difficulty</InputLabel>
-                    <Select
-                        native
-                        inputProps={{name: 'tradmaxdiff', id: 'tradmaxdiff-native-simple',}}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="tradmaxdiff"
-                        onChange={(e) => this.setState({tradmaxdiff: e.target.value})}
-                        value={this.state.tradmaxdiff}
-                        label="tradmaxdiff"
-                        autoComplete="tradmaxdiff"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                          <option value={9}>9</option>
-                          <option value={10}>10</option>
-                        </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControl>
-                    <InputLabel htmlFor="sportmaxdiff-native-simple">Sport Max Difficulty</InputLabel>
-                    <Select
-                        native
-                        inputProps={{name: 'sportmaxdiff', id: 'sportmaxdiff-native-simple',}}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="sportmaxdiff"
-                        onChange={(e) => this.setState({sportmaxdiff: e.target.value})}
-                        value={this.state.sportmaxdiff}
-                        label="sportmaxdiff"
-                        autoComplete="sportmaxdiff"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                          <option value={9}>9</option>
-                          <option value={10}>10</option>
-                        </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControl>
-                    <InputLabel htmlFor="daysclimbed-native-simple">Days Climbed</InputLabel>
-                    <Select
-                        native
-                        inputProps={{name: 'daysclimbed', id: 'daysclimbed-native-simple',}}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="daysclimbed"
-                        onChange={(e) => this.setState({daysclimbed: e.target.value})}
-                        value={this.state.daysclimbed}
-                        label="daysclimbed"
-                        autoComplete="daysclimbed"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                          <option value={9}>9</option>
-                          <option value={10}>10</option>
-                        </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControl>
-                    <InputLabel htmlFor="duration-native-simple">Duration</InputLabel>
-                    <Select
-                        native
-                        inputProps={{name: 'duration', id: 'duration-native-simple',}}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="duration"
-                        onChange={(e) => this.setState({duration: e.target.value})}
-                        value={this.state.duration}
-                        label="duration"
-                        autoComplete="duration"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                          <option value={9}>9</option>
-                          <option value={10}>10</option>
-                        </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControlLabel
-                        
-                        onChange={(e) => console.log(e.target)}
-                        value={this.state.secret}
-                        label="Would you like this entry to be private?"
-                        id="secret"
-                        
-                        control={<Checkbox value="Yes"/>}
-                  />  
                     
-                    <Button
-                    type="submit"
-                    onClick={this.handleSubmit}
-                    fullWidth
-                    variant="contained"
-                  >
-                    Update Goal!
-                  </Button > */}
-
-
 <Form>
           <FormGroup>
             <Label for="pitchCount">Create Goal</Label>
@@ -344,7 +130,7 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
               name="pitchcount"
               id="pitchcount"
               placeholder="PitchCount"
-              onChange={(e) => this.setState({ pitchcount: e.target.value })}
+              onChange={(e) => this.setState({ pitchcount: Number(e.target.value) })}
               value={this.state.pitchcount}
               label="PitchCount"
             >
@@ -457,7 +243,7 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
               name="tradpitches"
               id="tradpitches"
               placeholder="Trad Pitches"
-              onChange={(e) => this.setState({ tradpitches: e.target.value })}
+              onChange={(e) => this.setState({ tradpitches: Number(e.target.value) })}
               value={this.state.tradpitches}
               label="TradPitches"
             >
@@ -571,7 +357,7 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
               name="sportpitches"
               id="sportpitches"
               placeholder="SportPitches"
-              onChange={(e) => this.setState({ sportpitches: e.target.value })}
+              onChange={(e) => this.setState({ sportpitches: Number(e.target.value) })}
               value={this.state.sportpitches}
               label="SportPitches"
             >
@@ -759,7 +545,7 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
               name="daysclimbed"
               id="daysclimbed"
               placeholder="DaysClimbed"
-              onChange={(e) => this.setState({ daysclimbed: e.target.value })}
+              onChange={(e) => this.setState({ daysclimbed: Number(e.target.value) })}
               value={this.state.daysclimbed}
               label="DaysClimbed"
             >
@@ -804,7 +590,7 @@ class GoalEdit extends React.Component<GoalEditProps, GoalEditState> {
               name="duration"
               id="duration"
               placeholder="Duration"
-              onChange={(e) => this.setState({ duration: e.target.value })}
+              onChange={(e) => this.setState({ duration: Number(e.target.value) })}
               value={this.state.duration}
               label="Duration"
             >

@@ -6,12 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import GoalEdit from './GoalEdit';
 
 import {GoalObject} from './ClimbInterfaces';
@@ -60,22 +54,36 @@ class GoalDisplay extends React.Component<GoalDisplayProps, GoalDisplayState> {
     }
     render() { 
         return ( <div style={{width: '100%'}}>
-            <TableContainer style={{width:'100%'}}>
+            <TableContainer>
 <Table  aria-label="simple table">
-  
+<TableHead>
+    <TableRow>
+    <TableCell align="center">Goal Setter #</TableCell>
+      <TableCell align='center'>Goal #</TableCell>
+      <TableCell align="center">PitchCount</TableCell>
+      <TableCell align="center">TradPitches</TableCell>
+      <TableCell align="center">SportPitches</TableCell>
+      <TableCell align="center">TradMaxDiff</TableCell>
+      <TableCell align="center">SportMaxDiff</TableCell>
+      <TableCell align="center">Days Climbed</TableCell>
+      <TableCell align="center">Duration</TableCell>
+      
+    </TableRow>
+  </TableHead>
   <TableBody>
     
       <TableRow key={this.props.goal.id}>
-        <TableCell component="th" scope="row">
-          {this.props.goal.id}
+        <TableCell align="center" component="th" scope="row">
+          {this.props.goal.owner_id}
         </TableCell>
-        <TableCell align="right">{this.props.goal.pitchcount} Pitches </TableCell>
-        <TableCell align="right">{this.props.goal.tradpitches}</TableCell>
-        <TableCell align="right">{this.props.goal.sportpitches}</TableCell>
-        <TableCell align="right">{this.props.goal.tradmaxdiff}</TableCell>
-        <TableCell align="right">{this.props.goal.sportmaxdiff}</TableCell>
-        <TableCell align="right">{this.props.goal.daysclimbed}</TableCell>
-        <TableCell align="right">{this.props.goal.duration}</TableCell>
+        <TableCell align="center">{this.props.goal.id}</TableCell>
+        <TableCell align="center">{this.props.goal.pitchcount}</TableCell>
+        <TableCell align="center">{this.props.goal.tradpitches}</TableCell>
+        <TableCell align="center">{this.props.goal.sportpitches}</TableCell>
+        <TableCell align="center">{this.props.goal.tradmaxdiff}</TableCell>
+        <TableCell align="center">{this.props.goal.sportmaxdiff}</TableCell>
+        <TableCell align="center">{this.props.goal.daysclimbed}</TableCell>
+        <TableCell align="center">{this.props.goal.duration}</TableCell>
         <GoalEdit sessionToken={this.props.sessionToken} goalToUpdate={this.props.editUpdateGoal} goal={this.props.goal}/>
         {/* <Button variant='contained' size='small' onClick={() => {this.props.editUpdateGoal(this.props.goal); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button> */}
   <Button  variant='contained' size='small'  onClick={() => this.deleteGoal(this.props.goal)}>Delete</Button>

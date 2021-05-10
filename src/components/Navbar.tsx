@@ -23,10 +23,10 @@ const styles = (theme:any) => ({
  
     palette: {
       primary: {
-        main: '#5352a1',
+        main: '#aecbea',
       },
       secondary: {
-        main: '#5352a1',
+        main: '#c2b092',
       },
     },    
     root: {
@@ -66,13 +66,13 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
       const {classes} = this.props;
       
         return (
-           <AppBar position="static" style={{backgroundColor: '#A0A152'}} >
-        <Toolbar style={{color: '#5352A1'}}>
+           <AppBar position="static" style={{backgroundColor: '#caff00'}} >
+        <Toolbar style={{color: '#000000'}}>
         <img src={betabreak} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title}>
             BetaBreak
           </Typography>
-          <Button className={classes.menuButton} variant='contained' color='primary' style={{backgroundColor: '#5352a1'}} onClick={this.clearToken}>Logout</Button>
+          <Button className={classes.menuButton} variant='contained' color='primary' style={{backgroundColor: '#ff00ff'}} onClick={this.clearToken}>Logout</Button>
         </Toolbar>
       </AppBar> );
     }

@@ -23,17 +23,17 @@ export interface OutdoorClimb {
 
 export interface GoalObject {
     id: number;
-    pitchcount: string;
-    tradpitches: string;
-    sportpitches: string;
+    pitchcount: number;
+    tradpitches: number;
+    sportpitches: number;
     tradmaxdiff: string;
     sportmaxdiff: string;
-    daysclimbed: string;
-    duration: string;
+    daysclimbed: number;
+    duration: number;
     secret: boolean;
     owner_id: number;
-    updatedAt: Date;
-    createdAt: Date;
+    // updatedAt: Date;
+    // createdAt: Date;
 
 }
 
