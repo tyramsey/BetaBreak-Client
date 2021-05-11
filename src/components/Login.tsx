@@ -7,7 +7,7 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import APIURL from '../helpers/environments';
@@ -18,6 +18,8 @@ interface LoginProps {
   updateToken: (newToken: string) => void
   handleToggle: () => void;
   updateRole: Function;
+  classes: any;
+    theme: any;
 }
 interface LoginState {
   username: string;
@@ -33,7 +35,44 @@ const Regex = RegExp(
   /^\s?[A-Z0–9]+[A-Z0–9._+-]{0,}@[A-Z0–9._+-]+\.[A-Z0–9]{2,4}\s?$/i
 );
 
-export default class Login extends React.Component<LoginProps, LoginState> {
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  table: {
+    minWidth: 650,
+  },
+  main: {
+    margin: 0,
+  },
+  button: {
+    backgroundColor: '#caff00',
+    color: '#4f0091',
+    
+  },
+  login: {
+    justifyContent: 'center',
+    color: 'black'
+  },
+  buttonTwo: {
+    backgroundColor: '#caff00',
+    color: '#4f0091',
+    
+  },
+  loginText: {
+    fontFamily: 'Impact',
+    fontSize: '50px',
+    marginLeft: '42%',
+  }
+})
+
+class Login extends React.Component<LoginProps, LoginState> {
 
     constructor(props: LoginProps) {
         super(props);
@@ -94,14 +133,15 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   render() {
     console.log(this.props);
     const { errors } = this.state;
+    const {classes} = this.props;
     return (
-      <Container>
+      <Container className={classes.login}>
         <CssBaseline />
-          <Typography>Login</Typography>
+          <Typography className={classes.loginText}>Login</Typography>
           <br/>
           <form onSubmit={this.handleSubmit} noValidate>
-            <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
+            <Grid container spacing={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="username"
                 name="username"
@@ -118,7 +158,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               )}
             </Grid>
         
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="password"
                 name="password"
@@ -157,3 +197,5 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     );
   }
 }
+
+export default withStyles(styles, {withTheme: true}) (Login);

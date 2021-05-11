@@ -2,6 +2,7 @@ import * as React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import OutdoorClimbs from './OutdoorClimbs';
+import { withStyles } from '@material-ui/core/styles';
 
 import CreateTick from './CreateTick';
 import Button from '@material-ui/core/Button';
@@ -15,7 +16,8 @@ import { OutdoorClimb } from './ClimbInterfaces';
 import { GoalObject } from './ClimbInterfaces';
 
 export interface ClimbDataProps {
-  
+    classes: any;
+    theme: any;
     sessionToken: string;
     
 }
@@ -28,6 +30,30 @@ export interface ClimbDataState {
     goalToUpdate: {};
 }
 
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  table: {
+    minWidth: 650,
+  },
+  main: {
+    margin: 0,
+  },
+  button: {
+    backgroundColor: '#caff00',
+    color: '4f0091',
+    height: '40px',
+    marginLeft: '38%',
+    margin: '10px' 
+  }
+})
 
 
 class ClimbData extends React.Component<ClimbDataProps, ClimbDataState> {
@@ -127,39 +153,37 @@ displayTable() {
     return this.state.climbs.length > 0 ? this.state.climbs.map((climb) => <OutdoorClimbs climb={climb} climbs={this.state.climbs} editUpdateClimb={this.editUpdateClimb} updateOn={this.updateOn} fetchClimbs={this.fetchClimbs.bind(this)} sessionToken={this.props.sessionToken} />) : null;
 }
     render() { 
+      const {classes} = this.props;
         return (
-        <Container>
+        <Container className={classes.main} style={{backgroundColor: '#4f0091'}} >
 
         <Grid container xs={12}>
         
-           <Grid>
+           <Grid item sm={4}>
              <CreateTick sessionToken={this.props.sessionToken} />
              {/* fetchClimbs={this.fetchClimbs} */}
            </Grid>
-           <Grid container item xs={9} alignItems="flex-start">
+           <Grid item sm={8} xs={12} alignItems="flex-start">
            
            {this.displayGoals()}
            {/* {this.state.updateActive ? <GoalEdit goalToUpdate={this.state.goalToUpdate} updateOn ={this.updateOn} updateOff={this.updateOff} sessionToken={this.props.sessionToken} /> : <></>} */}
            <br/>
+           <div style={{alignContent: 'center'}}>
+           {localStorage.getItem('role') === '1' ? <CreateGoal sessionToken={this.props.sessionToken} /> : null}
+           <Button className={classes.button} onClick={this.fetchGoals.bind(this)}>Fetch Goals Button</Button>
+           <Button className={classes.button} onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>
+           </div>
            <br/>
-           <br/>
-           <Button onClick={this.fetchGoals.bind(this)}>Fetch Goals Button</Button>
-           <br/><br/><br/>
            
-          
+           </Grid>
+           </Grid>
           {this.displayTable()}
           {/* {this.state.updateActive ? <ClimbEdit climbToUpdate={this.state.climbToUpdate} sessionToken={this.props.sessionToken} /> : <></>} */}
-          </Grid>
-           </Grid>
-           <Button onClick={this.fetchClimbs.bind(this)}>Fetch Ticks Button</Button>
+          
            
-           <Grid>
-             {localStorage.getItem('role') === '1' ? <CreateGoal sessionToken={this.props.sessionToken} /> : null}
-             {/* fetchClimbs={this.fetchClimbs} */}
-           </Grid>
    
        </Container>);
     }
 }
  
-export default ClimbData;
+export default withStyles(styles, {withTheme: true}) (ClimbData);

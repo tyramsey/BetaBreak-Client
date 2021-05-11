@@ -1,7 +1,8 @@
 .App {
   background-color: white;
   font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  color: black;
+  color: white;
+  width: 100vw;
 }
 
 .App-logo {

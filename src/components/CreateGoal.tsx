@@ -1,12 +1,20 @@
 
 import * as React from 'react';
 import './styles.css';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import Button from '@material-ui/core/Button';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { withStyles } from '@material-ui/core/styles';
 
-import { Form, FormGroup, Label, Input, FormText, Button} from 'reactstrap';
 
 import APIURL from '../helpers/environments';
 export interface CreateGoalProps {
-    sessionToken: string
+    sessionToken: string;
+    classes: any;
+    theme: any;
 }
  
 export interface CreateGoalState {
@@ -18,8 +26,34 @@ export interface CreateGoalState {
     daysclimbed: string;
     duration: string;
     secret: Boolean;
+    open: any;
 }
  
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  table: {
+    minWidth: 650,
+  },
+  main: {
+    margin: 0,
+  },
+  button: {
+    backgroundColor: '#caff00',
+    color: '4f0091',
+    height: '40px',
+    marginLeft: '45%',
+    margin: '5px' 
+  }
+})
+
 class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
     constructor(props: CreateGoalProps) {
         super(props);
@@ -31,7 +65,8 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
             sportmaxdiff: '',
             daysclimbed: '',
             duration: '',
-            secret: false
+            secret: false,
+            open: false
           };
     }
 
@@ -61,10 +96,33 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
               // this.props.fetchClimbs();
             })
     }
+    handleClickOpen = () => {
+      this.setState({open: true});
+    };
+  
+    handleClose = () => {
+     this.setState({open:false});
+    };
+
     render() { 
+      const {classes} = this.props;
         return ( 
 
-          <div className='create-goal-form'><Form>
+          <div className='create-goal-form'>
+            <Button className={classes.button} onClick={this.handleClickOpen}>
+            Update
+          </Button>
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            // PaperComponent={PaperComponent}
+            aria-labelledby="draggable-dialog-title"
+          >
+            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+              Update
+            </DialogTitle>
+            <DialogContent>
+            <Form>
           <FormGroup>
             <Label for="pitchCount">Create Goal</Label>
             {/* <Input plaintext value="Let's goal!" /> */}
@@ -644,10 +702,20 @@ class CreateGoal extends React.Component<CreateGoalProps, CreateGoalState> {
                     Create Goal!
                   </Button >
         </Form>
+        </DialogContent>
+            <DialogActions>
+              <Button autoFocus onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button type='submit' onClick={this.handleSubmit} color="primary">
+                Send Goal!
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
 
         );
     }
 }
  
-export default CreateGoal;
+export default withStyles(styles, {withTheme: true}) (CreateGoal);

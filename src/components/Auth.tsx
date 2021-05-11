@@ -5,16 +5,48 @@ import Login from './Login';
 import { Jumbotron } from 'reactstrap';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+
 
 export interface AuthProps {
     updateToken: (newToken: string) => void; 
     updateRole: Function;
+    classes: any;
+    theme: any;
 }
  
 export interface AuthState {
     showLogin: boolean;
 }
+const styles = (theme:any) => ({
  
+    palette: {
+      primary: {
+        main: '#aecbea',
+      },
+      secondary: {
+        main: '#c2b092',
+      },
+    },
+    table: {
+      minWidth: 650,
+    },
+    main: {
+      margin: 0,
+    },
+    button: {
+      backgroundColor: '#caff00',
+      color: '4f0091',
+      height: '40px',
+      width: '100px',
+    },
+    auth: {
+        backgroundColor: '#00000',
+        },
+    text: {
+        fontFamily: 'Impact'
+    }
+  })
 class Auth extends React.Component<AuthProps, AuthState> {
     constructor(props: AuthProps) {
         super(props);
@@ -26,20 +58,21 @@ class Auth extends React.Component<AuthProps, AuthState> {
     } else {
         this.setState({showLogin: true })
     }}
-
+    
     render() { 
-        return ( <Container className="auth-container">
+        const {classes} = this.props;
+        return ( <Container className={classes.auth}>
         <div>
-                    <Jumbotron  className="w-100" style={{backgroundImage: `url('https://images.unsplash.com/photo-1516592673884-4a382d1124c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80')` }}>
+                    <Jumbotron  className="w-100" style={{backgroundImage: `url('https://images.unsplash.com/photo-1579411289916-1cc31988d330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80')` }}>
                 <Container>
-                  <Typography><h1 className="display-3 text-dark"  >Welcome to BetaBreak</h1>
-                  <h2 className="lead text-dark">The ultimate top out!</h2>
+                  <Typography className={classes.text}><h1 className="display-3 text-light"  >Welcome to BetaBreak</h1>
+                  <h2 className="lead text-light">The ultimate top out!</h2>
                   <hr className="my-2" />
                   <br/>
-                  <p className="text-dark">BetaBreak is the place to record and track all your climbs. Indoor... Outdoor... Sport... Boulder... Trad... <br></br> We've created a zone specifically to enchance your climbing performance through organization and efficiency. <br></br></p>
+                  <p className="text-light">BetaBreak is the place to record and track all your climbs. Indoor... Outdoor... Sport... Boulder... Trad... <br></br> We've created a zone specifically to enchance your climbing performance through organization and efficiency. <br></br></p>
                   <br/>
                   <br/>
-                  <p className="text-dark">Climb. Tick. Send. Tick. So on... The routes are unlimited... <br></br></p>
+                  <p className="text-light">Climb. Tick. Send. Tick. So on... The routes are unlimited... <br></br></p>
                   
                   </Typography>
                 </Container>
@@ -55,4 +88,4 @@ class Auth extends React.Component<AuthProps, AuthState> {
         );
     }}
  
-export default Auth;
+export default withStyles(styles, {withTheme: true}) (Auth);

@@ -15,6 +15,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { OutdoorClimb } from './ClimbInterfaces';
+import { withStyles } from '@material-ui/core/styles';
+
 
 import APIURL from '../helpers/environments';
 
@@ -25,6 +27,8 @@ export interface ClimbEditProps {
     climbToUpdate: any | null;
     // updateOn: Function;
     climb: OutdoorClimb;
+    classes: any;
+    theme: any;
 }
  
 export interface ClimbEditState {
@@ -45,6 +49,30 @@ export interface ClimbEditState {
     open: boolean;
 }
  
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  table: {
+    minWidth: 650,
+  },
+  main: {
+    margin: 0,
+  },
+  button: {
+    backgroundColor: '#caff00',
+    color: '4f0091',
+    height: '40px',
+    width: '100px',
+  }
+})
+
 class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
     constructor(props: ClimbEditProps) {
         super(props);
@@ -113,8 +141,9 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
         };
       
     render() { 
+      const {classes} = this.props;
         return (<div>
-          <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+          <Button className={classes.button} onClick={this.handleClickOpen}>
             Update
           </Button>
           <Dialog
@@ -355,4 +384,4 @@ class ClimbEdit extends React.Component<ClimbEditProps, ClimbEditState> {
     }
 }
  
-export default ClimbEdit;
+export default withStyles(styles, {withTheme: true}) (ClimbEdit);

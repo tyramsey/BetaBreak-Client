@@ -16,7 +16,8 @@ import {FormControl} from '@material-ui/core';
 
 import APIURL from '../helpers/environments';
 export interface CreateTickProps {
-    
+    classes: any;
+    theme: any;
     sessionToken: string;
     // fetchClimbs: (updateActive: boolean) => void;
     // fetchClimbs: Function;
@@ -53,27 +54,10 @@ const styles = (theme:any) => ({
       main: '#c2b092',
     },
   },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'left',
+  table: {
+    minWidth: 650,
   },
-  BirdrIcon: {
-    margin: theme.spacing(1),
-    backgroundColor: '#c2b092',
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(1),
-  },
-  button: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#eae3cb',
-  },
-  checkbox: {
-    backgroundColor: '#b65f50',
-  },
+  
 })
 
 class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
@@ -152,9 +136,10 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
           }
 
     render() { 
+      const {classes} = this.props;
       console.log(this.props.sessionToken)
         return ( <div className="create-tick-form">
-            <Container style={{backgroundColor: '#caff00'}}>
+            <Container style={{backgroundColor: '#caff00'}} className={classes.palette}>
             <br/>
             <br/>
             <br/>
@@ -368,4 +353,4 @@ class CreateTick extends React.Component<CreateTickProps, CreateTickState> {
     }
 }
  
-export default CreateTick;
+export default withStyles(styles, {withTheme: true}) (CreateTick);

@@ -12,11 +12,13 @@ import Container from '@material-ui/core/Container';
 import APIURL from '../helpers/environments';
 import { Select } from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
-
+import { withStyles } from '@material-ui/core/styles';
 
 interface SignUpProps {
   name?: any;
   value?: any;
+  classes: any;
+    theme: any;
   updateToken: (newToken: string) => void;
   handleToggle: () => void;
   updateRole: Function;
@@ -36,7 +38,43 @@ const Regex = RegExp(
   /^\s?[A-Z0–9]+[A-Z0–9._+-]{0,}@[A-Z0–9._+-]+\.[A-Z0–9]{2,4}\s?$/i
 );
 
-export default class SignUp extends React.Component<SignUpProps, SignUpState> {
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  table: {
+    minWidth: 650,
+  },
+  main: {
+    margin: 0,
+  },
+  // button: {
+  //   backgroundColor: '#caff00',
+  //   color: '#4f0091',
+    
+  // },
+  signup: {
+    justifyContent: 'center',
+    color: 'black'
+  },
+  // buttonTwo: {
+    
+  //   color: '#4f0091',
+    
+  // },
+  signupText: {
+    fontFamily: 'Impact',
+    fontSize: '50px',
+    marginLeft: '41%',
+  }
+})
+class SignUp extends React.Component<SignUpProps, SignUpState> {
 
     constructor(props: SignUpProps) {
         super(props);
@@ -97,14 +135,15 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
   
   render() {
     const { errors } = this.state;
+    const { classes } = this.props;
     return (
-      <Container>
+      <Container className={classes.signup}>
         <CssBaseline />
-          <Typography>Sign Up</Typography>
+          <Typography className={classes.signupText}>Sign Up</Typography>
           <br/>
           <form onSubmit={this.handleSubmit} noValidate>
-            <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
+            <Grid container spacing={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="username"
                 name="username"
@@ -120,7 +159,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
                 <span style={{ color: "red" }}>{errors.username}</span>
               )}
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="email"
                 name="email"
@@ -137,7 +176,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
                 <span style={{ color: "red" }}>{errors.email}</span>
               )}
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="password"
                 name="password"
@@ -154,7 +193,7 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
                 <span style={{ color: "red" }}>{errors.password}</span>
               )}
             </Grid>
-            <Grid>
+            <Grid item xs={6}>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -172,14 +211,15 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
             </Grid>
             
               <Button
+              className={classes.button}
               type="submit"
               onClick={this.handleSubmit}
               fullWidth
               variant="contained"
               color="primary"
               >Register Me</Button>
-            <Grid item>
-              <Button 
+            <Grid item style={{marginLeft: '37.5%'}}>
+              <Button className={classes.buttonTwo}
               onClick={this.props.handleToggle}
               >
                 Already a member? Login 
@@ -192,3 +232,4 @@ export default class SignUp extends React.Component<SignUpProps, SignUpState> {
     );
   }
 }
+export default withStyles(styles, {withTheme: true}) (SignUp);

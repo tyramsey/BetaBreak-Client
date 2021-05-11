@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import ClimbEdit from './ClimbEdit';
+import { withStyles } from '@material-ui/core/styles';
+
 
 import { OutdoorClimb } from './ClimbInterfaces';
 import APIURL from '../helpers/environments';
@@ -18,6 +20,8 @@ export interface OutdoorClimbProps {
     climbs: OutdoorClimb[];
     editUpdateClimb: Function;
     updateOn: Function;
+    classes: any;
+    theme: any;
     
 
 }
@@ -27,6 +31,35 @@ export interface OutdoorClimbState {
 }
  
 
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#ff00ff',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  table: {
+    minWidth: 650,
+  },
+  main: {
+    margin: 0,
+  },
+  button: {
+    backgroundColor: '#910600',
+    color: 'white',
+    height: '40px',
+    width: '100px'
+  },
+  heading: {
+    color: 'white'
+  },
+  ticks: {
+    color: '#ff00ff'
+  }
+})
 
 class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState> {
     constructor(props: OutdoorClimbProps) {
@@ -55,49 +88,53 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
     }
 
     render() { 
-      
+      const {classes} = this.props;
         return (<div>
         
 
 <TableContainer>
 <Table  aria-label="simple table">
-<TableHead>
+<TableHead className={classes.heading}>
     <TableRow>
-      <TableCell>#</TableCell>
-      <TableCell>RouteName</TableCell>
-      <TableCell align="right">Location</TableCell>
-      <TableCell align="right">Date</TableCell>
-      <TableCell align="right">Type</TableCell>
-      <TableCell align="right">Difficulty</TableCell>
-      <TableCell align="right">Pitches</TableCell>
-      <TableCell align="right">Grade</TableCell>
-      <TableCell align="right">Style</TableCell>
-      <TableCell align="right">Beta</TableCell>
-      <TableCell align="right">Duration</TableCell>
-      <TableCell align="right">Rating</TableCell>
-      <TableCell align="right">Image</TableCell>
+    <TableCell className={classes.heading} align="center">Image</TableCell>
+      <TableCell className={classes.heading}>#</TableCell>
+      <TableCell className={classes.heading}>RouteName</TableCell>
+      <TableCell align="center" className={classes.heading}>Location</TableCell>
+      <TableCell align="center" className={classes.heading}>Date</TableCell>
+      <TableCell align="center" className={classes.heading}>Type</TableCell>
+      <TableCell align="center" className={classes.heading}>Difficulty</TableCell>
+      <TableCell align="center" className={classes.heading}>Pitches</TableCell>
+      <TableCell align="center" className={classes.heading}>Grade</TableCell>
+      <TableCell align="center" className={classes.heading}>Style</TableCell>
+      <TableCell align="center" className={classes.heading}>Beta</TableCell>
+      <TableCell align="center" className={classes.heading}>Duration</TableCell>
+      <TableCell align="center" className={classes.heading}>Rating</TableCell>
+      <TableCell align="center" className={classes.heading}>Actions</TableCell>
+      
       
     </TableRow>
   </TableHead>
   <TableBody>
     
       <TableRow key={this.props.climb.id}>
-        <TableCell component="th" scope="row">
+      <TableCell align="center"><img src={this.props.climb.image_id} alt='' style={{width: '200px'}}/></TableCell>
+        <TableCell component="th" scope="row" className={classes.ticks}>
           {this.props.climb.id}
         </TableCell>
-        <TableCell align="right">{this.props.climb.routename} </TableCell>
-        <TableCell align="right">{this.props.climb.location} </TableCell>
-        <TableCell align="right">{this.props.climb.date}</TableCell>
-        <TableCell align="right">{this.props.climb.type}</TableCell>
-        <TableCell align="right">{this.props.climb.difficulty}</TableCell>
-        <TableCell align="right">{this.props.climb.pitches}</TableCell>
-        <TableCell align="right">{this.props.climb.grade}</TableCell>
-        <TableCell align="right">{this.props.climb.style}</TableCell>
-        <TableCell align="right">{this.props.climb.beta}</TableCell>
-        <TableCell align="right">{this.props.climb.duration}</TableCell>
-        <TableCell align="right">{this.props.climb.rating}</TableCell>
-        <TableCell align="right"><img src={this.props.climb.image_id} alt='' style={{width: '200px'}}/></TableCell>
-        <TableCell><ClimbEdit sessionToken={this.props.sessionToken} climbToUpdate={this.props.editUpdateClimb} climb={this.props.climb}/><br/><Button  variant='contained' size='small'  onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button></TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.routename} </TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.location} </TableCell>
+        
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.date}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.type}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.difficulty}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.pitches}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.grade}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.style}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.beta}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.duration}</TableCell>
+        <TableCell align="center" className={classes.ticks}>{this.props.climb.rating}</TableCell>
+        
+        <TableCell ><ClimbEdit sessionToken={this.props.sessionToken} climbToUpdate={this.props.editUpdateClimb} climb={this.props.climb}/><br/><Button className={classes.button} onClick={() => this.deleteClimb(this.props.climb)}>Delete</Button></TableCell>
         {/* <Button variant='contained' size='small' onClick={() => {this.props.editUpdateClimb(this.props.climb); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button> */}
   
       </TableRow>
@@ -111,4 +148,4 @@ class OutdoorClimbs extends React.Component<OutdoorClimbProps, OutdoorClimbState
     }
 }
  
-export default OutdoorClimbs;
+export default withStyles(styles, {withTheme: true}) (OutdoorClimbs);

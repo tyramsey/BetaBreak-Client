@@ -7,7 +7,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import GoalEdit from './GoalEdit';
-
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 import {GoalObject} from './ClimbInterfaces';
 // import { url } from 'node:inspector';
 import APIURL from '../helpers/environments';
@@ -19,11 +25,31 @@ export interface GoalDisplayProps {
     goals: GoalObject[];
     editUpdateGoal: Function;
     updateOn: Function;
+    classes: any;
+    theme: any;
 }
  
 export interface GoalDisplayState {
     open: boolean;
 }
+
+const styles = (theme:any) => ({
+ 
+  palette: {
+    primary: {
+      main: '#aecbea',
+    },
+    secondary: {
+      main: '#c2b092',
+    },
+  },
+  table: {
+    minWidth: 650,
+  },
+  text:{
+    color: '#00000',
+  }
+})
 
 class GoalDisplay extends React.Component<GoalDisplayProps, GoalDisplayState> {
     constructor(props: GoalDisplayProps) {
@@ -53,9 +79,10 @@ class GoalDisplay extends React.Component<GoalDisplayProps, GoalDisplayState> {
     )
     }
     render() { 
+      const {classes} = this.props;
         return ( <div style={{width: '100%'}}>
-            <TableContainer>
-<Table  aria-label="simple table">
+            <TableContainer style={{backgroundColor: '#caff00'}}>
+<Table className={classes.table} aria-label="simple table">
 <TableHead>
     <TableRow>
     <TableCell align="center">Goal Setter #</TableCell>
@@ -93,52 +120,55 @@ class GoalDisplay extends React.Component<GoalDisplayProps, GoalDisplayState> {
   
 </Table>
 </TableContainer>
-</div>
-//   <Card style={{ width: '100%' }}>
-//         <CardActionArea>
-//           {/* <CardMedia
-//             // className={classes.media}
-//             image={}
-//             title="Contemplative Reptile"
-//           /> */}
-//           <CardContent>
-//             <Typography align='center' gutterBottom variant="h5" component="h2">
-//             {this.props.goal.pitchcount}
-//             </Typography>
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.tradpitches}
-//             </Typography>
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.daysclimbed} || {this.props.goal.duration}
-//             </Typography>
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.sportpitches}
-//             </Typography>
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.tradmaxdiff}
-//             </Typography>
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.sportmaxdiff}
-//             </Typography>
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.daysclimbed}
-//             </Typography>
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.duration}
-//             </Typography>
+
+  <Card style={{ width: '100%' }}>
+        <CardActionArea>
+          {/* <CardMedia
+            // className={classes.media}
+            image={}
+            title="Contemplative Reptile"
+          /> */}
+          <CardContent className={classes.text}>
+            <Typography align='center' gutterBottom variant="h4" component="h2">AMGA SPI Certification</Typography>
+            <Typography align='center' gutterBottom variant="h4" component="h2">Highlights</Typography>
+            <Typography align='center' gutterBottom variant="h5" component="h2">
+            {this.props.goal.pitchcount} Total Rope Lengths Climbed
+            </Typography>
+            {/* <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.goal.tradpitches}
+            </Typography> */}
+            <Typography align='center' variant="body1" color="textSecondary" component="p">
+            {this.props.goal.daysclimbed} Days || {this.props.goal.duration} Hours
+            </Typography>
+            {/* <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.goal.sportpitches}
+            </Typography> */}
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            Trad Highpoint {this.props.goal.tradmaxdiff}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            Sport Highpoint {this.props.goal.sportmaxdiff}
+            </Typography>
+            {/* <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.goal.daysclimbed}
+            </Typography>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.goal.duration}
+            </Typography> */}
      
-//             <Typography align='center' variant="body2" color="textSecondary" component="p">
-//             {this.props.goal.secret}
-//             </Typography>
-//           </CardContent>
-//         </CardActionArea>
-//         <CardActions style={{justifyContent: 'center'}}>
-//         <Button variant='contained' size='small' onClick={() => {this.props.editUpdateGoal(this.props.goal); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
-//   <Button  variant='contained' size='small'  onClick={() => this.deleteGoal(this.props.goal)}>Delete</Button>
-//         </CardActions>
-//       </Card>
+            <Typography align='center' variant="body2" color="textSecondary" component="p">
+            {this.props.goal.secret}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        {/* <CardActions style={{justifyContent: 'center'}}>
+        <Button variant='contained' size='small' onClick={() => {this.props.editUpdateGoal(this.props.goal); this.handleClickOpen() ; this.props.updateOn()}} >Update</Button>
+  <Button  variant='contained' size='small'  onClick={() => this.deleteGoal(this.props.goal)}>Delete</Button>
+        </CardActions> */}
+      </Card>
+      </div>
          );
     }
 }
  
-export default GoalDisplay;
+export default withStyles(styles, {withTheme: true}) (GoalDisplay);
