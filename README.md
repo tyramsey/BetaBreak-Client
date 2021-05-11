@@ -1,3 +1,13 @@
+Mission Statement
+Beta Break is an app where you can record, rate, and track your climbing tick-list and trip reports in hopes of achieving guide certifications. 
+User Stories
+Beta Break user1:
+As a user, a guest can build a custom ticklist, track their personal climbing goals... The apps is based off the spreadsheet tables used by the International Federation of Mountain Guides Associations for all their guide track programs. 
+Beta Break user2:
+As a guide, a guest can set a goal for a certain group or certification requirement. All users in the database will be able to see the goals created by certified guides. 
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
